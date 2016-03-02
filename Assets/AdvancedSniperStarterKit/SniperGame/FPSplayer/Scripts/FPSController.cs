@@ -93,8 +93,8 @@ public class FPSController : MonoBehaviour
 		localCameraRotationOffset = Vector3.Lerp (localCameraRotationOffset, Vector3.zero, Time.deltaTime * 3);
 		float swayY = (Mathf.Cos (Time.fixedTime * 10 * swaySpeed) * 0.3f) * sizeY;
 		float swayX = (Mathf.Sin (Time.fixedTime * 5 * swaySpeed) * 0.2f) * sizeX;
-		FPSCamera.gameObject.transform.localPosition = Vector3.Lerp (FPSCamera.gameObject.transform.localPosition, localCameraPositionTemp + new Vector3 (swayX, swayY, 0), Time.deltaTime * 3);
-		FPSCamera.gameObject.transform.localRotation = Quaternion.Lerp (FPSCamera.gameObject.transform.localRotation, Quaternion.Euler (localCameraRotationTemp.eulerAngles + localCameraRotationOffset), Time.deltaTime * 3);
+		//FPSCamera.gameObject.transform.localPosition = Vector3.Lerp (FPSCamera.gameObject.transform.localPosition, localCameraPositionTemp + new Vector3 (swayX, swayY, 0), Time.deltaTime * 3);
+		//FPSCamera.gameObject.transform.localRotation = Quaternion.Lerp (FPSCamera.gameObject.transform.localRotation, Quaternion.Euler (localCameraRotationTemp.eulerAngles + localCameraRotationOffset), Time.deltaTime * 3);
 
 	}
 
@@ -196,14 +196,17 @@ public class FPSController : MonoBehaviour
       
 		Quaternion xQuaternion = Quaternion.AngleAxis (rotationX, Vector3.up);
 		Quaternion yQuaternion = Quaternion.AngleAxis (rotationY + stunY, Vector3.left);
-		
-		if (FPSmain) {
-			FPSmain.transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-		} else {
-			transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-		}
-		
-		breathHolderVal += (breathHolderValtarget - breathHolderVal) / 10;	
+
+        if (FPSmain)
+        {
+            FPSmain.transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+        }
+        else
+        {
+            transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+        }
+
+        breathHolderVal += (breathHolderValtarget - breathHolderVal) / 10;	
 		rotationDif = FPSCamera.transform.rotation.eulerAngles - lastRotation;
 		positionDif = FPSCamera.transform.localPosition - positionDif;
 		lastRotation = FPSCamera.transform.rotation.eulerAngles;

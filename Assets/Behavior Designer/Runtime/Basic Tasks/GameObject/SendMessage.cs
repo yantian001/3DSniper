@@ -16,9 +16,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Basic.UnityGameObject
         public override TaskStatus OnUpdate()
         {
             if (value.Value != null) {
-                GetDefaultGameObject(targetGameObject.Value).SendMessage(message.Value, value.Value.value.GetValue());
+                GetDefaultGameObject(targetGameObject.Value).SendMessage(message.Value, value.Value.value.GetValue(),SendMessageOptions.DontRequireReceiver);
             } else {
-                GetDefaultGameObject(targetGameObject.Value).SendMessage(message.Value);
+                GetDefaultGameObject(targetGameObject.Value).SendMessage(message.Value, SendMessageOptions.DontRequireReceiver);
             }
 
             return TaskStatus.Success;

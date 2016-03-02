@@ -8,7 +8,9 @@ public class GunHanddle : MonoBehaviour
 	public int GunIndex;
 	[HideInInspector]
 	public Gun CurrentGun;
-	
+
+    bool isFirstFire = false;
+
 	void Start ()
 	{
 		if (Guns.Length < 1) {
@@ -89,8 +91,15 @@ public class GunHanddle : MonoBehaviour
 	
 	public void Shoot ()
 	{
-		if (CurrentGun)
-			CurrentGun.Shoot ();
+        if (CurrentGun)
+        {
+            CurrentGun.Shoot();
+            isFirstFire = true;
+            if(isFirstFire)
+            {
+                BehaviorDesigner.Runtime.GlobalVariables.Instance.SetVariableValue("PlayerFired", true);
+            }
+        }
 	}
 	
 	public void HoldBreath (int noiseMult)
