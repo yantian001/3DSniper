@@ -27,7 +27,7 @@ public class AP_BulletFollowPreset : AS_ActionPreset
 			ActionCam.ObjectLookAt = bullet.gameObject;
 			ActionCam.Follow = true;
 			ActionCam.ActionBullet (10.0f);
-			ActionCam.SlowmotionNow (0.25f, 3.0f);
+			ActionCam.SlowmotionNow (0.025f, 3.0f);
 			ActionCam.LengthMult = 0.2f;
 			ActionCam.SetPosition (bullet.transform.position + (bullet.transform.right * ZoomMulti) - (bullet.transform.forward * ZoomMulti), ActionCam.Detected);
 			ActionCam.CameraOffset = -Vector3.right;
@@ -60,10 +60,9 @@ public class AP_BulletFollowPreset : AS_ActionPreset
 		if (!ActionCam) {
 			return;	
 		}
-		
 			ActionCam.ActionBullet (2.0f);
 			ActionCam.ObjectLookAt = null;
-			ActionCam.SlowmotionNow (0.1f, 1.6f);
+			ActionCam.SlowmotionNow (0.01f, 1.6f);
 			ActionCam.Follow = true;
 			ActionCam.lookAtPosition = point;
 			ActionCam.SetPositionDistance (point, true);
