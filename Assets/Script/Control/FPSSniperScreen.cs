@@ -15,7 +15,8 @@ public class FPSSniperScreen : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        gunHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<GunHanddle>();
+        //gunHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<GunHanddle>();
+        gunHandler = FindObjectOfType ( typeof(GunHanddle) ) as GunHanddle;
         if (ScreenSlider != null)
         {
             ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length;
