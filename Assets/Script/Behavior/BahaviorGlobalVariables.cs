@@ -9,6 +9,12 @@ public class BahaviorGlobalVariables : MonoBehaviour {
     public float oneShootTime = 1.6f;
 
     public float attackRate = 50f;
+
+    public int enemyBulletCount = 1;
+
+    public float enemySpread = 1f;
+
+    public float enemyAttack = 5f;
 	// Use this for initialization
 	void Start () {
         GlobalVariables.Instance.SetVariableValue("PlayerFired", false);
@@ -38,7 +44,9 @@ public class BahaviorGlobalVariables : MonoBehaviour {
         GlobalVariables.Instance.SetVariableValue("CounchTime", crouchTimeMax - 0.06f*GameValue.level);
         GlobalVariables.Instance.SetVariableValue("EnemyThinkTime", (oneShootTime - 0.01f * (float)GameValue.level) * (2f - seed));
         GlobalVariables.Instance.SetVariableValue("AttackRate", attackRate + GameValue.level * seed);
-
+        GlobalVariables.Instance.SetVariableValue("EnemyBulletCount", enemyBulletCount + GameValue.level / 10);
+        GlobalVariables.Instance.SetVariableValue("AttackSpread", (enemySpread - (0.01f * GameValue.level) * seed));
+        GlobalVariables.Instance.SetVariableValue("Attack", (enemyAttack + (0.01f * GameValue.level) * seed));
     }
 
 

@@ -5,5 +5,5 @@ public class GameValue  {
     /// <summary>
     /// current level
     /// </summary>
-    public static int level = 10;
+    public static int level = 40;
 }

@@ -20,7 +20,30 @@ public class Spwaner : MonoBehaviour {
         }
         foreach(SpawnItem si in spawns)
         {
-            GameObject obj = Instantiate(GetSpawnObject(), si.transform.position, si.transform.rotation) as GameObject;
+            if(!si.isMuti)
+            {
+                if(GameValue.level >= si.beginLevel)
+                {
+                    GameObject obj = Instantiate(GetSpawnObject(), si.transform.position, si.transform.rotation) as GameObject;
+                }
+            }
+            else
+            {
+                if(si.itemConfigs!=null && si.itemConfigs.Length > 0)
+                {
+                    foreach(SpawnItemConfig sic in si.itemConfigs)
+                    {
+                        if (GameValue.level >= sic.level)
+                        {
+                            for(int i= 0;i <sic.count;i++)
+                            {
+                                Vector3 spawnPoint = DetectGround(si.transform.position + new Vector3(Random.Range(-(int)(si.transform.localScale.x / 2.0f), (int)(si.transform.localScale.x / 2.0f)), 0, Random.Range((int)(-si.transform.localScale.z / 2.0f), (int)(si.transform.localScale.z / 2.0f))));
+                                Instantiate(GetSpawnObject(), spawnPoint, si.transform.rotation);
+                            }
+                        }
+                    }
+                }
+            }
         }
 	}
 	
@@ -38,4 +61,15 @@ public class Spwaner : MonoBehaviour {
 	void Update () {
 	
 	}
+    
+
+    Vector3 DetectGround(Vector3 position)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(position, -Vector3.up, out hit, 1000.0f))
+        {
+            return hit.point;
+        }
+        return position;
+    }
 }
