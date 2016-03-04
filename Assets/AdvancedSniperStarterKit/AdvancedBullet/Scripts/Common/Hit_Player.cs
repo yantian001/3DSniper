@@ -19,7 +19,8 @@ public class Hit_Player : AS_BulletHiter {
         {
             damageManage.ApplyDamage(bullet.Damage, bullet.transform.forward * bullet.HitForce, 0f);
             vp_DamageInfo info = new vp_DamageInfo(bullet.Damage, bullet.source, vp_DamageInfo.DamageType.Bullet);
-            SendMessageUpwards("OnMessage_HUDDamageFlash", info, SendMessageOptions.DontRequireReceiver);
+            // SendMessageUpwards("OnMessage_HUDDamageFlash", info, SendMessageOptions.DontRequireReceiver);
+            gameObject.BroadcastMessage("OnMessage_HUDDamageFlash", info, SendMessageOptions.DontRequireReceiver);
         }
         base.OnHit(hit, bullet);
     }
