@@ -28,6 +28,7 @@ public class DamageManager : MonoBehaviour
 		}
 		distancedamage = distance;
 		hp -= damage;
+        Debug.Log(damage);
 	}
 	
 	public void ApplyDamage (int damage, Vector3 velosity, float distance, int suffix)

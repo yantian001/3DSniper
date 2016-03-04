@@ -98,34 +98,40 @@ public class Gun : MonoBehaviour
 	{
 		if (!FPSmotor || !Active)
 			return;
-		
-		float magnitude = FPSmotor.motor.controller.velocity.magnitude * 0.5f;
-		magnitude = Mathf.Clamp (magnitude, 0, 10);
-		float swaySpeed = 0;
-		float sizeY = 0.1f;
-		float sizeX = 0.1f;
-		// Gun sway volume depending on move velosity.
-		if (magnitude > 2) {
-			swaySpeed = 1.4f;
-			sizeY = 0.2f;
-			sizeX = 0.2f;
-		} else {
-			if (magnitude < 1.0f) {
-				swaySpeed = 0;
-				sizeY = 0.05f;
-				sizeX = 0.05f;
-			} else {
-				swaySpeed = 1;
-				sizeY = 0.1f;
-				sizeX = 0.1f;	
-				
-			}
-		}
-		float swayY = (Mathf.Cos (Time.time * 10 * swaySpeed) * 0.3f) * sizeY;
-		float swayX = (Mathf.Sin (Time.time * 5 * swaySpeed) * 0.2f) * sizeX;
-		this.transform.localPosition = Vector3.Lerp (this.transform.localPosition, positionTemp + new Vector3 (swayX, swayY, 0), Time.fixedDeltaTime * 4);
-		this.transform.localRotation = Quaternion.Lerp (this.transform.localRotation, Quaternion.Euler ((rotationTemp.eulerAngles.x + (FPSmotor.rotationDif.x)), (rotationTemp.eulerAngles.y + (FPSmotor.rotationDif.y)), (rotationTemp.eulerAngles.z + (FPSmotor.direction.x * 7))), Time.fixedDeltaTime * 3);
-	}
+
+        float magnitude = FPSmotor.motor.controller.velocity.magnitude * 0.5f;
+        magnitude = Mathf.Clamp(magnitude, 0, 10);
+        float swaySpeed = 0;
+        float sizeY = 0.1f;
+        float sizeX = 0.1f;
+        // Gun sway volume depending on move velosity.
+        if (magnitude > 2)
+        {
+            swaySpeed = 1.4f;
+            sizeY = 0.2f;
+            sizeX = 0.2f;
+        }
+        else
+        {
+            if (magnitude < 1.0f)
+            {
+                swaySpeed = 0;
+                sizeY = 0.05f;
+                sizeX = 0.05f;
+            }
+            else
+            {
+                swaySpeed = 1;
+                sizeY = 0.1f;
+                sizeX = 0.1f;
+
+            }
+        }
+        float swayY = (Mathf.Cos(Time.time * 10 * swaySpeed) * 0.3f) * sizeY;
+        float swayX = (Mathf.Sin(Time.time * 5 * swaySpeed) * 0.2f) * sizeX;
+        this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, positionTemp + new Vector3(swayX, swayY, 0), Time.fixedDeltaTime * 4);
+        this.transform.localRotation = Quaternion.Lerp(this.transform.localRotation, Quaternion.Euler((rotationTemp.eulerAngles.x + (FPSmotor.rotationDif.x)), (rotationTemp.eulerAngles.y + (FPSmotor.rotationDif.y)), (rotationTemp.eulerAngles.z + (FPSmotor.direction.x * 7))), Time.fixedDeltaTime * 3);
+    }
 	
 	void Update ()
 	{
@@ -373,33 +379,32 @@ public class Gun : MonoBehaviour
 		}
 	}
 	
-	void OnGUI ()
-	{
-		if (!Active)
-			return;
-
-		if (NormalCamera) {
-			if (NormalCamera.GetComponent<Camera>().enabled) {
-				if (!Zooming) {
-					if (CrosshairImg) {
-						GUI.color = new Color (1, 1, 1, 0.8f);
+	//void OnGUI ()
+	//{
+	//	if (!Active)
+	//		return;
+ //       GUI.depth = 1;
+ //       if (NormalCamera) {
+	//		if (NormalCamera.GetComponent<Camera>().enabled) {
+	//			if (!Zooming) {
+	//				if (CrosshairImg) {
+	//					GUI.color = new Color (1, 1, 1, 0.8f);
+	//					GUI.DrawTexture (new Rect ((Screen.width * 0.5f) - (CrosshairImg.width * 0.5f), (Screen.height * 0.5f) - (CrosshairImg.height * 0.5f), CrosshairImg.width, CrosshairImg.height), CrosshairImg);
+	//					GUI.color = Color.white;
+	//				}
+	//			} else {
+	//				if (CrosshairZoom) {
+	//					float scopeSize = (Screen.height * 1.8f);
+	//					GUI.DrawTexture (new Rect ((Screen.width * 0.5f) - (scopeSize * 0.5f), (Screen.height * 0.5f) - (scopeSize * 0.5f), scopeSize, scopeSize), CrosshairZoom);
+	//					GUI.skin.label.fontSize = 24;
+	//					GUI.skin.label.normal.textColor = new Color (0, 0, 0, 1);
+	//					GUI.Label (new Rect ((Screen.width * 0.5f) - (CrosshairImg.width * 0.2f) + 30, (Screen.height * 0.5f) - (CrosshairImg.height * 0.2f), 200, 30), "H "+Offset.x+" : V "+Offset.y);
 						
-						GUI.DrawTexture (new Rect ((Screen.width * 0.5f) - (CrosshairImg.width * 0.5f), (Screen.height * 0.5f) - (CrosshairImg.height * 0.5f), CrosshairImg.width, CrosshairImg.height), CrosshairImg);
-						GUI.color = Color.white;
-					}
-				} else {
-					if (CrosshairZoom) {
-						float scopeSize = (Screen.height * 1.8f);
-						GUI.DrawTexture (new Rect ((Screen.width * 0.5f) - (scopeSize * 0.5f), (Screen.height * 0.5f) - (scopeSize * 0.5f), scopeSize, scopeSize), CrosshairZoom);
-						GUI.skin.label.fontSize = 24;
-						GUI.skin.label.normal.textColor = new Color (0, 0, 0, 1);
-						GUI.Label (new Rect ((Screen.width * 0.5f) - (CrosshairImg.width * 0.2f) + 30, (Screen.height * 0.5f) - (CrosshairImg.height * 0.2f), 200, 30), "H "+Offset.x+" : V "+Offset.y);
-						
-					}
-				}
-			}
-		}
-	}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 	
 
 }
