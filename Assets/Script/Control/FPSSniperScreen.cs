@@ -12,6 +12,8 @@ public class FPSSniperScreen : MonoBehaviour
 
     float currentDelta = 0;
 
+    bool zoomed = false;
+
     // Use this for initialization
     void Start()
     {
@@ -20,6 +22,7 @@ public class FPSSniperScreen : MonoBehaviour
         if (ScreenSlider != null)
         {
             ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length;
+            ScreenSlider.gameObject.SetActive(zoomed);
            // ScreenSlider.onValueChanged.AddListener(SliderDelta);
         }
     }
@@ -49,19 +52,31 @@ public class FPSSniperScreen : MonoBehaviour
     {
         if (gunHandler == null)
             return;
+
+       
         if (gunHandler.CurrentGun.Zooming)
         {
-            InScreen.SetActive(true);
-            ScreenSlider.gameObject.SetActive(true);
+            if(zoomed == false)
+            {
+                InScreen.SetActive(true);
+                ScreenSlider.gameObject.SetActive(true);
+                zoomed = true;
+            }
+          
             //ScreenSlider.value = 0;
             //currentDelta = 0;
         }
         else
         {
-            InScreen.SetActive(false);
-            ScreenSlider.gameObject.SetActive(false);
+            if(zoomed)
+            {
+                InScreen.SetActive(false);
+                ScreenSlider.gameObject.SetActive(false);
 
-            currentDelta = 0;
+                currentDelta = 0;
+                zoomed = false;
+            }
+           
 
         }
     }
