@@ -74,29 +74,33 @@ public class FPSController : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		float magnitude = motor.controller.velocity.magnitude * 0.5f;
-		float swaySpeed = 1;
-		float sizeX = 1.3f;
-		float sizeY = 1.3f;
-		if (magnitude > 3) {
-			swaySpeed = 1.8f;
-			sizeX = 2;
-			sizeY = 2;
-		} else {
-			swaySpeed = 1;
-			sizeX = 1.0f;
-			sizeY = 1.0f;
-			if (magnitude <= 1) {
-				swaySpeed = 0;	
-			}
-		}
-		localCameraRotationOffset = Vector3.Lerp (localCameraRotationOffset, Vector3.zero, Time.deltaTime * 3);
-		float swayY = (Mathf.Cos (Time.fixedTime * 10 * swaySpeed) * 0.3f) * sizeY;
-		float swayX = (Mathf.Sin (Time.fixedTime * 5 * swaySpeed) * 0.2f) * sizeX;
-		//FPSCamera.gameObject.transform.localPosition = Vector3.Lerp (FPSCamera.gameObject.transform.localPosition, localCameraPositionTemp + new Vector3 (swayX, swayY, 0), Time.deltaTime * 3);
-		//FPSCamera.gameObject.transform.localRotation = Quaternion.Lerp (FPSCamera.gameObject.transform.localRotation, Quaternion.Euler (localCameraRotationTemp.eulerAngles + localCameraRotationOffset), Time.deltaTime * 3);
+        float magnitude = motor.controller.velocity.magnitude * 0.5f;
+        float swaySpeed = 1;
+        float sizeX = 1.3f;
+        float sizeY = 1.3f;
+        if (magnitude > 3)
+        {
+            swaySpeed = 1.8f;
+            sizeX = 2;
+            sizeY = 2;
+        }
+        else
+        {
+            swaySpeed = 1;
+            sizeX = 1.0f;
+            sizeY = 1.0f;
+            if (magnitude <= 1)
+            {
+                swaySpeed = 0;
+            }
+        }
+        localCameraRotationOffset = Vector3.Lerp(localCameraRotationOffset, Vector3.zero, Time.deltaTime * 3);
+        float swayY = (Mathf.Cos(Time.fixedTime * 10 * swaySpeed) * 0.3f) * sizeY;
+        float swayX = (Mathf.Sin(Time.fixedTime * 5 * swaySpeed) * 0.2f) * sizeX;
+        FPSCamera.gameObject.transform.localPosition = Vector3.Lerp(FPSCamera.gameObject.transform.localPosition, localCameraPositionTemp + new Vector3(swayX, swayY, 0), Time.deltaTime * 3);
+        FPSCamera.gameObject.transform.localRotation = Quaternion.Lerp(FPSCamera.gameObject.transform.localRotation, Quaternion.Euler(localCameraRotationTemp.eulerAngles + localCameraRotationOffset), Time.deltaTime * 3);
 
-	}
+    }
 
 	public void HideGun (bool visible)
 	{

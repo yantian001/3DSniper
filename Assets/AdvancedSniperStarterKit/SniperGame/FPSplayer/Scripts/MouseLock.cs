@@ -13,17 +13,17 @@ public static class MouseLock
 		set {
 			mouseLocked = value;
 			
-			#if UNITY_4_6
-				Screen.lockCursor = mouseLocked;
-			#else
-				Cursor.visible = !value;
-				if (Cursor.visible) {	
-					Cursor.lockState = CursorLockMode.None;
-				} else {
-					Cursor.lockState = CursorLockMode.Locked;
+			//#if UNITY_4_6
+			//	Screen.lockCursor = mouseLocked;
+			//#else
+			//	Cursor.visible = !value;
+			//	if (Cursor.visible) {	
+			//		Cursor.lockState = CursorLockMode.None;
+			//	} else {
+			//		Cursor.lockState = CursorLockMode.Locked;
 			
-				}
-			#endif
+			//	}
+			//#endif
 		}
 	}
 	

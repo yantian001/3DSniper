@@ -27,6 +27,7 @@ public class EnemyShoot : MonoBehaviour
             //b.transform.SetParent(transform);
             // b.
             // b.GetComponent<Rigidbody>().velocity = b.transform.TransformDirection(firePosition.position - targetTranform.position);
+            b.GetComponent<AS_Bullet>().source = transform;
             b.transform.forward =(targetTranform.position- firePosition.position + new Vector3(Random.Range(-spread,spread), Random.Range(-spread, spread), Random.Range(-spread, spread))).normalized;
         }
     }
