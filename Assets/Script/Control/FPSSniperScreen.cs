@@ -21,7 +21,7 @@ public class FPSSniperScreen : MonoBehaviour
         gunHandler = FindObjectOfType ( typeof(GunHanddle) ) as GunHanddle;
         if (ScreenSlider != null)
         {
-            ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length;
+            ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length-1;
             ScreenSlider.gameObject.SetActive(zoomed);
            // ScreenSlider.onValueChanged.AddListener(SliderDelta);
         }
