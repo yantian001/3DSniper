@@ -15,6 +15,10 @@ public class AS_SoundOnHit : MonoBehaviour {
 			}
 			audiosource.PlayOneShot(Sounds[Random.Range(0,Sounds.Length)]);
 		}
+        else
+        {
+            Destroy(gameObject);
+        }
 	}
 	void Update(){
 		if(audiosource != null && Sounds!=null && Sounds.Length>0){
@@ -22,7 +26,10 @@ public class AS_SoundOnHit : MonoBehaviour {
 			if(audiosource.pitch<0.5f){
 				audiosource.pitch = 0.5f;
 			}
-		
+            if(!audiosource.isPlaying)
+            {
+                Destroy(audiosource.gameObject, 0.5f);
+            }
 		}
 	}
 	
