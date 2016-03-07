@@ -2,7 +2,8 @@
 using System.Collections;
 using BehaviorDesigner.Runtime;
 
-public class BahaviorGlobalVariables : MonoBehaviour {
+public class BahaviorGlobalVariables : MonoBehaviour
+{
 
     public float crouchTimeMax = 8f;
 
@@ -15,16 +16,17 @@ public class BahaviorGlobalVariables : MonoBehaviour {
     public float enemySpread = 1f;
 
     public float enemyAttack = 5f;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         GlobalVariables.Instance.SetVariableValue("PlayerFired", false);
 
         float seed = 1f;
-        if(GameValue.level < 4)
+        if (GameValue.level < 4)
         {
             seed = .6f;
         }
-        else if(GameValue.level < 11 && GameValue.level > 3)
+        else if (GameValue.level < 11 && GameValue.level > 3)
         {
             seed = .7f;
         }
@@ -41,14 +43,17 @@ public class BahaviorGlobalVariables : MonoBehaviour {
             seed = 1.4f;
         }
 
-        GlobalVariables.Instance.SetVariableValue("CounchTime", crouchTimeMax - 0.06f*GameValue.level);
-        GlobalVariables.Instance.SetVariableValue("EnemyThinkTime", (oneShootTime - 0.01f * (float)GameValue.level) * (2f - seed));
-        GlobalVariables.Instance.SetVariableValue("AttackRate", attackRate + GameValue.level * seed);
-        GlobalVariables.Instance.SetVariableValue("EnemyBulletCount", enemyBulletCount + GameValue.level / 10);
-        GlobalVariables.Instance.SetVariableValue("AttackSpread", (enemySpread - (0.01f * GameValue.level) * seed));
-        GlobalVariables.Instance.SetVariableValue("Attack", (enemyAttack + (0.01f * GameValue.level) * seed));
+        SetVariableValue("CounchTime", crouchTimeMax - 0.06f * GameValue.level);
+        SetVariableValue("EnemyThinkTime", (oneShootTime - 0.01f * (float)GameValue.level) * (2f - seed));
+        SetVariableValue("AttackRate", attackRate + GameValue.level * seed);
+        SetVariableValue("EnemyBulletCount", enemyBulletCount + GameValue.level / 10);
+        SetVariableValue("AttackSpread", (enemySpread - (0.01f * GameValue.level) * seed));
+        SetVariableValue("Attack", (enemyAttack + (0.01f * GameValue.level) * seed));
     }
 
-
+   public static void SetVariableValue(string strName, object val)
+    {
+        GlobalVariables.Instance.SetVariableValue(strName, val);
+    }
 
 }

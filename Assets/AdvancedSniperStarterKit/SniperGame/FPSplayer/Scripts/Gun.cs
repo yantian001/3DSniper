@@ -76,7 +76,8 @@ public class Gun : MonoBehaviour
 	void Awake ()
 	{
 		rotationTemp = this.transform.localRotation;
-		positionTemp = this.transform.localPosition;
+        //positionTemp = this.transform.localPosition;
+        positionTemp = new Vector3(0f, 0.17f, 0f); ;
 		this.transform.localPosition = positionTemp - (Vector3.up);
 		
 	}
