@@ -8,4 +8,12 @@
     /// 时间到
     /// </summary>
     TIMEUP,
+    /// <summary>
+    /// 使用了money
+    /// </summary>
+    MONEYUSED,
+    /// <summary>
+    /// 金币数量变化
+    /// </summary>
+    MONEYCHANGED,
 }

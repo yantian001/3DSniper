@@ -10,6 +10,8 @@ public class DamageManager : MonoBehaviour
 	public int hp = 100;
 	public int Score = 10;
 	private float distancedamage;
+
+    public bool isEnemy = true;
 	
 	void Start(){
 		
@@ -46,22 +48,28 @@ public class DamageManager : MonoBehaviour
 	
 	public void AfterDead (int suffix)
 	{
-		int scoreplus = Score;
-		
-		if(suffix == 2){
-			scoreplus = Score * 5;	
-		}
-			
-		ScoreManager score = (ScoreManager)GameObject.FindObjectOfType (typeof(ScoreManager));	
-		if(score){
-			score.AddScore (scoreplus, distancedamage);
-		}
+        //int scoreplus = Score;
+
+        //if(suffix == 2){
+        //	scoreplus = Score * 5;	
+        //}
+
+        //ScoreManager score = (ScoreManager)GameObject.FindObjectOfType (typeof(ScoreManager));	
+        //if(score){
+        //	score.AddScore (scoreplus, distancedamage);
+        //}
+        EnemyDeadInfo edi = new EnemyDeadInfo();
+        edi.score = Score;
+        edi.transform = this.transform;
+        edi.headShot = suffix == 2;
+        LeanTween.dispatchEvent((int)Events.ENEMYDIE, edi);
 	}
 	
 	
 	public void Dead (int suffix)
 	{
-
+        if (!isEnemy)
+            return;
 		if (deadbody.Length > 0 && suffix >= 0 && suffix < deadbody.Length) {
 			// this Object has removed by Dead and replaced with Ragdoll. the ObjectLookAt will null and ActionCamera will stop following and looking.
 			// so we have to update ObjectLookAt to this Ragdoll replacement. then ActionCamera to continue fucusing on it.
