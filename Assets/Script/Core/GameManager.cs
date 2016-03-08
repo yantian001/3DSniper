@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         //启用特效镜头
         if (ActionCamera != null)
         {
-            if (spwaner.IsLastEnemy())
+            if (spwaner.GetEnemyCount() <= 1)
             {
                 ActionCamera.gameObject.SetActive(true);
             }
