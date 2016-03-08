@@ -32,6 +32,19 @@ public class CommonUtils
             }
         }
     }
+    /// <summary>
+    /// 设置文本组件内容
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="text"></param>
+    public static void SetText(GameObject obj, string text)
+    {
+        if (obj == null)
+            return;
+        var textNode = obj.GetComponent<Text>();
+        if (textNode)
+            textNode.text = text;
+    }
 
     /// <summary>
     /// 设置RawImage子节点的Texture2d值
