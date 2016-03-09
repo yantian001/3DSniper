@@ -45,6 +45,12 @@ public class TimeController : MonoBehaviour
             TimeText.text = currentTime.ToString();
         }
     }
-
-
+    /// <summary>
+    ///  获取剩余时间
+    /// </summary>
+    /// <returns></returns>
+    public int GetTimeLeft()
+    {
+        return currentTime;
+    }
 }

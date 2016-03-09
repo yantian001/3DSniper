@@ -16,4 +16,12 @@
     /// 金币数量变化
     /// </summary>
     MONEYCHANGED,
+    GAMERESTART,
+    MAINMENU,
+    BACKTOSTART,
+    GAMENEXT,
+    INTERSTITIALCLOSED,
+    GAMEFINISH,
+    GAMEPAUSE,
+    GAMECONTINUE,
 }

@@ -11,13 +11,19 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public Spwaner spwaner = null;
 
+    public TimeController timer;
+
     public HPSlider hp;
 
     public GameStatu statu { get; private set; }
 
+    GameRecords record = null;
     // Use this for initialization
     void Start()
     {
+        record = new GameRecords();
+        record.Level = GameValue.level;
+        record.MapId = GameValue.mapId;
         if (ActionCamera == null)
         {
             ActionCamera = FindObjectOfType(typeof(AS_ActionCamera)) as AS_ActionCamera;
@@ -38,17 +44,26 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(timer == null)
+        {
+            timer = FindObjectOfType(typeof(TimeController)) as TimeController;
+        }
+        
         ChangeGameStatu(GameStatu.InGame);
     }
 
     public void OnEnable()
     {
         LeanTween.addListener((int)Events.TIMEUP, OnTimeUp);
+        LeanTween.addListener((int)Events.ENEMYDIE, OnEnemyDie);
+        LeanTween.addListener((int)Events.GAMEPAUSE, OnPause);
     }
 
     public void OnDisable()
     {
         LeanTween.removeListener((int)Events.TIMEUP, OnTimeUp);
+        LeanTween.removeListener((int)Events.ENEMYDIE, OnEnemyDie);
+        LeanTween.removeListener((int)Events.GAMEPAUSE, OnPause);
 
     }
 
@@ -133,10 +148,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void OnEnemyDie(LTEvent evt)
+    {
+        if(evt.data != null)
+        {
+            var edi = evt.data as EnemyDeadInfo;
+            if (edi.headShot)
+                record.HeadShotCount += 1;
+            else
+                record.EnemyKills += 1;
+        }
+    }
+
     void OnTimeUp(LTEvent evt)
     {
         Debug.Log("Time Up!");
         ChangeGameStatu(GameStatu.Failed);
+        record.FinishType = GameFinishType.TimeUp;
+        GameFinish();
     }
 
     /// <summary>
@@ -146,12 +175,40 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level Completed!");
         ChangeGameStatu(GameStatu.Completed);
+        record.FinishType = GameFinishType.Completed;
+        GameFinish();
     }
 
     void OnPlayerDie()
     {
         Debug.Log("Player Die!");
         ChangeGameStatu(GameStatu.Failed);
+        record.FinishType = GameFinishType.Failed;
+        GameFinish();
     }
 
+    void GameFinish()
+    {
+        if (timer != null)
+            record.TimeLeft = timer.GetTimeLeft();
+        LeanTween.dispatchEvent((int)Events.GAMEFINISH, record);
+    }
+
+    void OnPause(LTEvent evt)
+    {
+        if(statu == GameStatu.InGame)
+        {
+            ChangeGameStatu(GameStatu.Paused);
+        }
+
+        LeanTween.addListener((int)Events.GAMECONTINUE, OnContinue);
+       // Time.timeScale = 0;
+    }
+
+    void OnContinue(LTEvent evt)
+    {
+        LeanTween.removeListener((int)Events.GAMECONTINUE, OnContinue);
+        ChangeGameStatu(GameStatu.InGame);
+      //  Time.timeScale = 1;
+    }
 }

@@ -9,6 +9,8 @@ public class MoneyHandler : MonoBehaviour
     public RectTransform parentTran;
 
     public float headshotMult = 1.5f;
+
+    public int MoneyPerTime = 5;
     
     void OnEnemyDie(LTEvent evt)
     {
@@ -22,10 +24,14 @@ public class MoneyHandler : MonoBehaviour
                 int m = edi.score;
                 if (edi.headShot)
                     m = Mathf.CeilToInt( m * headshotMult);
-                var pos = Camera.main.WorldToScreenPoint(edi.transform.position + new Vector3(0f,2f,0f));
-                var o = Instantiate(money, pos, Quaternion.identity) as GameObject;
-                o.transform.SetParent(parentTran);
-                CommonUtils.SetText(o, string.Format("+{0}$", m));
+                if (Camera.main.isActiveAndEnabled)
+                {
+                    var pos = Camera.main.WorldToScreenPoint(edi.transform.position + new Vector3(0f, 2f, 0f));
+                    var o = Instantiate(money, pos, Quaternion.identity) as GameObject;
+                    o.transform.SetParent(parentTran);
+                    CommonUtils.SetText(o, string.Format("+{0}$", m));
+                }
+                
                 LeanTween.dispatchEvent((int)(Events.MONEYUSED), -m);
             }
         }
@@ -39,6 +45,5 @@ public class MoneyHandler : MonoBehaviour
     public void OnDisable()
     {
         LeanTween.removeListener((int)Events.ENEMYDIE, OnEnemyDie);
-
     }
 }

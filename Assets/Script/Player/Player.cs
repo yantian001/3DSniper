@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -51,11 +52,26 @@ public class Player : MonoBehaviour
     public void OnEnable()
     {
         LeanTween.addListener((int)Events.MONEYUSED, OnMoneyUsed);
+        LeanTween.addListener((int)Events.GAMEFINISH, OnGameFinish);
+    }
+
+    private void OnGameFinish(LTEvent obj)
+    {
+        //throw new NotImplementedException();
+        if(obj.data != null)
+        {
+            var record = obj.data as GameRecords;
+            if(record != null)
+            {
+                UseMoney(-GameValue.moneyPerTimeLeft * record.TimeLeft);
+            }
+        }
     }
 
     public void OnDisable()
     {
         LeanTween.removeListener((int)Events.MONEYUSED, OnMoneyUsed);
+        LeanTween.removeListener((int)Events.GAMEFINISH, OnGameFinish);
     }
 
     void OnMoneyUsed(LTEvent evt)
