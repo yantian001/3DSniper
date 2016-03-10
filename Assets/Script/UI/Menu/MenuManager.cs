@@ -35,7 +35,7 @@ public class MenuManager : MonoBehaviour
             {
                 if (bi.relateZone != null)
                 {
-                    bi.relateZone.anchoredPosition = new Vector2(Screen.width, 0) + bi.relateZone.anchoredPosition;
+                    bi.relateZone.anchoredPosition = new Vector2(Screen.width*1.5f, 0) + bi.relateZone.anchoredPosition;
                     var btn = bi.GetComponent<Button>();
                     if (btn != null)
                     {
@@ -90,7 +90,7 @@ public class MenuManager : MonoBehaviour
         }
         if(currentZone)
         {
-            LeanTween.moveX(currentZone, currentZone.anchoredPosition.x - Screen.width,0.5f);
+            LeanTween.moveX(currentZone, currentZone.anchoredPosition.x - Screen.width*1.5f,0.5f);
             currentZone = currentBtnIndex.relateZone;
             LeanTween.moveX(currentZone, 0, 0.5f);
         }

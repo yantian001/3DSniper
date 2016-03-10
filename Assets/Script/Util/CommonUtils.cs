@@ -131,4 +131,26 @@ public class CommonUtils
         to.anchorMin = from.anchorMin;
         to.pivot = from.pivot;
     }
+
+    /// <summary>
+    /// 设置按钮的回调
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="child"></param>
+    /// <param name="action"></param>
+    public static void SetChildButtonCallBack(RectTransform parent ,string child ,UnityEngine.Events.UnityAction action)
+    {
+        if (parent == null || string.IsNullOrEmpty(child) || action == null)
+            return;
+
+        var childNode = parent.FindChild(child);
+        if (childNode)
+        {
+            var button = childNode.GetComponent<Button>();
+            if(button)
+            {
+                button.onClick.AddListener(action);
+            }
+        }
+    }
 }
