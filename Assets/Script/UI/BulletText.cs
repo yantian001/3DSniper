@@ -20,7 +20,7 @@ public class BulletText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gunHandle == null || bulletText == null)
+        if (gunHandle == null || bulletText == null || gunHandle.CurrentGun == null)
         {
             return;
         }

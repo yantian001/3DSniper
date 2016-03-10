@@ -5,7 +5,7 @@ public class GunHanddle : MonoBehaviour
 {
     public Camera FPScamera;
     public Gun[] Guns;
-    public int GunIndex;
+    public int GunIndex = -1;
     [HideInInspector]
     public Gun CurrentGun;
 
@@ -23,7 +23,7 @@ public class GunHanddle : MonoBehaviour
                 Guns[i].NormalCamera = FPScamera;
             Guns[i].fovTemp = FPScamera.fieldOfView;
         }
-        SwitchGun(0);
+        SwitchGun();
     }
 
     void Update()
@@ -87,11 +87,25 @@ public class GunHanddle : MonoBehaviour
 
     public void SwitchGun()
     {
-        int index = GunIndex + 1;
-        if (index >= Guns.Length)
-            index = 0;
+        int count = 0;
+        while (true)
+        {
+            int index = GunIndex + 1;
+            if (index >= Guns.Length)
+                index = 0;
+            if (Player.CurrentUser.IsGunActived(Guns[index].id))
+            {
+                SwitchGun(index);
+                break;
+            }
+            if (count++ > 100)
+            {
+                break;
+            }
+        }
 
-        SwitchGun(index);
+
+
     }
 
     public void Shoot()

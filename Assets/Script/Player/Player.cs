@@ -55,6 +55,77 @@ public class Player : MonoBehaviour
     }
 
 
+    public int Gun2Active
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Gun2Active", 0);
+        }
+        private set
+        {
+            SetKeyIntValue("Gun2Active", value);
+        }
+    }
+
+    public int Gun2Ammo
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Gun2Ammo", 0);
+        }
+        set
+        {
+            SetKeyIntValue("Gun2Ammo", value);
+        }
+    }
+
+    public int Gun3Active
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Gun3Active", 0);
+        }
+        private set
+        {
+            SetKeyIntValue("Gun3Active", value);
+        }
+    }
+
+    public int Gun3Ammo
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Gun3Ammo", 0);
+        }
+        set
+        {
+            SetKeyIntValue("Gun3Ammo", value);
+        }
+    }
+
+    public int Medikit
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Medikit", 0);
+        }
+        set
+        {
+            SetKeyIntValue("Medikit", value);
+        }
+    }
+
+    public int BombCount
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Bomb", 0);
+        }
+        set
+        {
+            SetKeyIntValue("Bomb", value);
+        }
+    }
     private static Player _instance = null;
 
     public static Player CurrentUser
@@ -205,11 +276,39 @@ public class Player : MonoBehaviour
 
     public bool IsGunActived(int gunid)
     {
-        return true;
+
+        if (gunid == 1)
+            return true;
+        else if (gunid == 2)
+            return Gun2Active == 1;
+        else if (gunid == 3)
+            return Gun3Active == 1;
+        return false;
+           
     }
 
     public int GetMaterialCount(int id)
     {
+        if(id == 101)
+        {
+            return Medikit;
+        }
+        else if(id == 102)
+        {
+            return BombCount;
+        }
+        else if(id == 1)
+        {
+            return 0;
+        }
+        else if(id == 2)
+        {
+            return Gun2Ammo;
+        }
+        else if(id == 3)
+        {
+            return Gun3Ammo;
+        }
         return 0;
     }
 }

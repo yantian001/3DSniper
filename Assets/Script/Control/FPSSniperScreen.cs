@@ -19,12 +19,13 @@ public class FPSSniperScreen : MonoBehaviour
     {
         //gunHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<GunHanddle>();
         gunHandler = FindObjectOfType ( typeof(GunHanddle) ) as GunHanddle;
-        if (ScreenSlider != null)
+        if (ScreenSlider != null && gunHandler.CurrentGun != null)
         {
             ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length-1;
-            ScreenSlider.gameObject.SetActive(zoomed);
+          
            // ScreenSlider.onValueChanged.AddListener(SliderDelta);
         }
+        ScreenSlider.gameObject.SetActive(zoomed);
     }
 
     public void OnEnable()
@@ -50,7 +51,7 @@ public class FPSSniperScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gunHandler == null)
+        if (gunHandler == null || gunHandler.CurrentGun == null)
             return;
 
        
@@ -59,6 +60,7 @@ public class FPSSniperScreen : MonoBehaviour
             if(zoomed == false)
             {
                 InScreen.SetActive(true);
+                ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
                 ScreenSlider.gameObject.SetActive(true);
                 zoomed = true;
             }

@@ -6,7 +6,7 @@ using System.Collections;
 
 public class Gun : MonoBehaviour
 {
-
+    public int id = 0;
     public bool Active = true;
     public GameObject Bullets; // Bullet prefeb
     public float LifeTimeBullet = 5;
