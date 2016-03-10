@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameLogic : MonoBehaviour
 {
@@ -42,10 +43,23 @@ public class GameLogic : MonoBehaviour
             LeanTween.addListener((int)Events.MAINMENU, OnGameMainMenu);
             LeanTween.addListener((int)Events.BACKTOSTART, BackToStart);
             LeanTween.addListener((int)Events.GAMENEXT, OnGameNext);
+            LeanTween.addListener((int)Events.GAMESTART, OnGameStart);
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnGameStart(LTEvent obj)
+    {
+        if(obj.data == null || ConvertUtil.ToBool(obj.data) == false)
+        {
+            Loading(false);
+        }
+        else
+        {
+            Loading(true);
         }
     }
 
@@ -88,6 +102,7 @@ public class GameLogic : MonoBehaviour
     {
         // Debug.Log("OnDisable");
         LeanTween.removeListener((int)Events.GAMERESTART, OnGameRestart);
+        LeanTween.removeListener((int)Events.GAMESTART, OnGameStart);
         //LeanTween.removeListener((int)Events.MAINMENU, OnGameMainMenu);
         //LeanTween.removeListener((int)Events.BACKTOSTART, BackToStart);
         //LeanTween.removeListener((int)Events.GAMENEXT, OnGameNext);
@@ -99,6 +114,8 @@ public class GameLogic : MonoBehaviour
         //    Application.LoadLevel(s_LoadingSceneId);
         //else
         //    Application.LoadLevel(GameGlobalValue.s_CurrentScene);
+        Application.LoadLevel("changjing-1");
+        Debug.Log("Loading...");
     }
 
 
