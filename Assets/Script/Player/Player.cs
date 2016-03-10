@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
 
     public bool IsGunActived(int gunid)
     {
-        return false;
+        return true;
     }
 
     public int GetMaterialCount(int id)

@@ -19,6 +19,8 @@ public class ShopManager : MonoBehaviour
         {
             theDisplay = GetComponent<RectTransform>();
         }
+
+        
         UpdateItemDisplay();
     }
 
