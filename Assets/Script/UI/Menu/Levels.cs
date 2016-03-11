@@ -125,6 +125,13 @@ public class Levels : MonoBehaviour
                         }
                     }
                 }
+                //移动到当前关所在位子
+                int levelCurrent = Player.CurrentUser.GetSceneCurrentLevel(Maps[i].MapId);
+                if(levelCurrent > 15)
+                {
+                    int currentRow = Mathf.FloorToInt((float)levelCurrent / col);
+                    levelZone.anchoredPosition = new Vector2(levelZone.anchoredPosition.x, (currentRow -1) * gridGroup.cellSize.y + gridGroup.padding.top + (currentRow - 1) * gridGroup.spacing.y);
+                } 
             }
         }
 

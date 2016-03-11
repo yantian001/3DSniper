@@ -69,6 +69,10 @@ public class Gun : MonoBehaviour
 
         if (NormalCamera)
             fovTemp = NormalCamera.GetComponent<Camera>().fieldOfView;
+        if (!this.InfinityAmmo)
+        {
+            AmmoPack = Player.CurrentUser.GetMaterialCount(id);
+        }
 
         if (AmmoIn > 1)
             AmmoIn = 1;
@@ -77,14 +81,16 @@ public class Gun : MonoBehaviour
     void Awake()
     {
         rotationTemp = this.transform.localRotation;
-        if (gameObject.name == "M24_Gun")
-        {
-             positionTemp = new Vector3(0f, 0.17f, 0f); ;
-        }
-        else
-        {
-            positionTemp = this.transform.localPosition;
-        }
+        //if (gameObject.name == "M24_Gun")
+        //{
+        //     positionTemp = new Vector3(0f, 0.17f, 0f); ;
+        //}
+        //else
+        //{
+        //positionTemp = this.transform.localPosition;
+        positionTemp = new Vector3(0.1889963f, -0.08400011f, 0.3230037f);
+       // positionTemp = new Vector3(0f, 0.17f, 0f); ;
+        //}
         this.transform.localPosition = positionTemp - (Vector3.up);
 
     }
@@ -415,6 +421,10 @@ public class Gun : MonoBehaviour
                     GetComponent<Animation>().Play(ShootPose, PlayMode.StopAll);
                     timefire = Time.time;
                     cooldowntime = Time.time;
+                    if (!InfinityAmmo)
+                    {
+                        Player.CurrentUser.BuyGunAmmo(id, -1);
+                    }
                     if (!SemiAuto)
                     {
                         gunState = 1;

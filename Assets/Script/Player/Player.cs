@@ -175,6 +175,7 @@ public class Player : MonoBehaviour
         Level1Max = PlayerPrefs.GetInt("Level1", 0);
         Level2Max = PlayerPrefs.GetInt("Level2", 0);
         Level3Max = PlayerPrefs.GetInt("Level3", 0);
+       // UseMoney(-100000);
     }
 
     public void OnEnable()
@@ -310,5 +311,37 @@ public class Player : MonoBehaviour
             return Gun3Ammo;
         }
         return 0;
+    }
+
+    public void BuyGunAmmo(int gunid , int count)
+    {
+        if(gunid == 2)
+        {
+            Gun2Ammo += count;
+        }
+        else if(gunid == 3)
+        {
+            Gun3Ammo += count;
+        }
+        else if(gunid == 101)
+        {
+            Medikit += count;
+        }
+        else if(gunid == 102)
+        {
+            BombCount += count;
+        }
+    }
+
+    public void BuyGun(int gunid)
+    {
+        if(gunid == 2)
+        {
+            Gun2Active = 1;
+        }
+        else if(gunid == 3)
+        {
+            Gun3Active = 1;
+        }
     }
 }

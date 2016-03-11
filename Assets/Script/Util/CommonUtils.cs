@@ -149,6 +149,7 @@ public class CommonUtils
             var button = childNode.GetComponent<Button>();
             if(button)
             {
+                button.onClick.RemoveListener(action);
                 button.onClick.AddListener(action);
             }
         }

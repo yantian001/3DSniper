@@ -13,7 +13,6 @@ public class BulletText : MonoBehaviour
         if (gunHandle == null)
         {
             gunHandle = FindObjectOfType(typeof(GunHanddle)) as GunHanddle;
-
         }
     }
 

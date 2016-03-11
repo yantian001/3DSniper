@@ -14,7 +14,7 @@ public class HPSlider : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(!hp)
+        if (!hp)
         {
             hp = GetComponent<Slider>();
         }
@@ -32,6 +32,21 @@ public class HPSlider : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnEnable()
+    {
+        LeanTween.addListener((int)Events.USEMEDIKIT, OnUseMedikit);
+    }
+
+    public void OnDisable()
+    {
+        LeanTween.removeListener((int)Events.USEMEDIKIT, OnUseMedikit);
+    }
+
+    void OnUseMedikit(LTEvent evt)
+    {
+        dm.hp = Mathf.CeilToInt( hp.maxValue);
     }
 
     // Update is called once per frame

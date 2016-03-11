@@ -29,7 +29,8 @@ public class MoneyHandler : MonoBehaviour
                     var pos = Camera.main.WorldToScreenPoint(edi.transform.position + new Vector3(0f, 2f, 0f));
                     var o = Instantiate(money, pos, Quaternion.identity) as GameObject;
                     o.transform.SetParent(parentTran);
-                    CommonUtils.SetText(o, string.Format("+{0}$", m));
+                   // CommonUtils.SetText(o, string.Format("+{0}$", m));
+                    CommonUtils.SetChildText(o.GetComponent<RectTransform>(), "Text", string.Format("+ {0}", m));
                 }
                 
                 LeanTween.dispatchEvent((int)(Events.MONEYUSED), -m);

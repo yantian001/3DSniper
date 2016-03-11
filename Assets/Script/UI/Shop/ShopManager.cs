@@ -55,7 +55,7 @@ public class ShopManager : MonoBehaviour
                         CommonUtils.SetChildText(theDisplay, "Buy/IHave/Count", string.Format("x {0}", Player.CurrentUser.GetMaterialCount(currentItem.Id)));
 
 
-                        CommonUtils.SetChildButtonCallBack(theDisplay, "Buy/PriceBg/Button", OnBuyGunMaterial);
+                        CommonUtils.SetChildButtonCallBack(theDisplay, "Buy/Button", OnBuyItem);
                     }
                     else
                     {
@@ -67,7 +67,7 @@ public class ShopManager : MonoBehaviour
                     CommonUtils.SetChildActive(theDisplay, "Buy", false);
                     CommonUtils.SetChildActive(theDisplay, "BuyGun", true);
                     CommonUtils.SetChildText(theDisplay, "BuyGun/PriceBg/Price", "$"+currentItem.Price.ToString());
-                    CommonUtils.SetChildButtonCallBack(theDisplay, "BuyGun/PriceBg/Button", OnBuyGun);
+                    CommonUtils.SetChildButtonCallBack(theDisplay, "BuyGun/Button", OnBuyGun);
                 }
             }
             else
@@ -80,7 +80,7 @@ public class ShopManager : MonoBehaviour
 
                 CommonUtils.SetChildRawImage(theDisplay, "Buy/IHave/ItemIcon", currentItem.MatPackageIcon);
                 CommonUtils.SetChildText(theDisplay, "Buy/IHave/Count", string.Format("x {0}", Player.CurrentUser.GetMaterialCount(currentItem.Id)));
-                CommonUtils.SetChildButtonCallBack(theDisplay, "Buy/PriceBg/Button", OnBuyItem);
+                CommonUtils.SetChildButtonCallBack(theDisplay, "Buy/Button", OnBuyItem);
 
             }
 
@@ -91,17 +91,40 @@ public class ShopManager : MonoBehaviour
 
     private void OnBuyGunMaterial()
     {
-      //  throw new NotImplementedException();
+        //  throw new NotImplementedException();
+        if (currentItem == null)
+            return;
+        if(Player.CurrentUser.Money >= currentItem.SubMatPackagePrice)
+        {
+            Player.CurrentUser.UseMoney(currentItem.SubMatPackagePrice);
+            Player.CurrentUser.BuyGunAmmo(currentItem.Id, currentItem.SubMatPackageSize);
+            UpdateItemDisplay();
+        }
     }
 
     private void OnBuyGun()
     {
-       // throw new NotImplementedException();
+        // throw new NotImplementedException();
+        if (currentItem == null)
+            return;
+        if (Player.CurrentUser.Money >= currentItem.Price)
+        {
+            Player.CurrentUser.UseMoney(currentItem.Price);
+            Player.CurrentUser.BuyGun(currentItem.Id);
+            UpdateItemDisplay();
+        }
     }
 
     private void OnBuyItem()
     {
-      //  throw new NotImplementedException();
+        if (currentItem == null)
+            return;
+        if (Player.CurrentUser.Money >= currentItem.SubMatPackagePrice)
+        {
+            Player.CurrentUser.UseMoney(currentItem.SubMatPackagePrice);
+            Player.CurrentUser.BuyGunAmmo(currentItem.Id, currentItem.SubMatPackageSize);
+            UpdateItemDisplay();
+        }
     }
 
     public void OnPrevClicked()
