@@ -87,8 +87,8 @@ public class Gun : MonoBehaviour
         //}
         //else
         //{
-        //positionTemp = this.transform.localPosition;
-        positionTemp = new Vector3(0.1889963f, -0.08400011f, 0.3230037f);
+        positionTemp = this.transform.localPosition;
+        //positionTemp = new Vector3(0.1889963f, -0.08400011f, 0.3230037f);
        // positionTemp = new Vector3(0f, 0.17f, 0f); ;
         //}
         this.transform.localPosition = positionTemp - (Vector3.up);
