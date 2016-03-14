@@ -44,11 +44,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(timer == null)
+        if (timer == null)
         {
             timer = FindObjectOfType(typeof(TimeController)) as TimeController;
         }
-        
+
         ChangeGameStatu(GameStatu.InGame);
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         //    if (!ActionCamera.InAction)
         //        Debug.Log("Success");
         //}
-        if(statu == GameStatu.InGame)
+        if (statu == GameStatu.InGame)
         {
             CheckGameStatus();
             CheckActionCamera();
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
             ChangeGameStatu(GameStatu.Completed);
             OnGameCompleted();
         }
-        else if(hp.IsDead)
+        else if (hp.IsDead)
         {
             OnPlayerDie();
         }
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
 
     void OnEnemyDie(LTEvent evt)
     {
-        if(evt.data != null)
+        if (evt.data != null)
         {
             var edi = evt.data as EnemyDeadInfo;
             if (edi.headShot)
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void OnGameCompleted()
     {
-        Debug.Log("Level Completed!");
+        // Debug.Log("Level Completed!");
         ChangeGameStatu(GameStatu.Completed);
         record.FinishType = GameFinishType.Completed;
         GameFinish();
@@ -181,34 +181,40 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerDie()
     {
-        Debug.Log("Player Die!");
+        // Debug.Log("Player Die!");
         ChangeGameStatu(GameStatu.Failed);
         record.FinishType = GameFinishType.Failed;
+        // timer.SetTimeLeft(0);
         GameFinish();
     }
 
     void GameFinish()
     {
         if (timer != null)
-            record.TimeLeft = timer.GetTimeLeft();
+        {
+            if (record.FinishType != GameFinishType.Failed)
+                record.TimeLeft = timer.GetTimeLeft();
+            else
+                record.TimeLeft = 0;
+        }
         LeanTween.dispatchEvent((int)Events.GAMEFINISH, record);
     }
 
     void OnPause(LTEvent evt)
     {
-        if(statu == GameStatu.InGame)
+        if (statu == GameStatu.InGame)
         {
             ChangeGameStatu(GameStatu.Paused);
         }
 
         LeanTween.addListener((int)Events.GAMECONTINUE, OnContinue);
-       // Time.timeScale = 0;
+        // Time.timeScale = 0;
     }
 
     void OnContinue(LTEvent evt)
     {
         LeanTween.removeListener((int)Events.GAMECONTINUE, OnContinue);
         ChangeGameStatu(GameStatu.InGame);
-      //  Time.timeScale = 1;
+        //  Time.timeScale = 1;
     }
 }

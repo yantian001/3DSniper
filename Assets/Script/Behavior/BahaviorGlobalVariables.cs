@@ -32,15 +32,15 @@ public class BahaviorGlobalVariables : MonoBehaviour
         }
         else if (GameValue.level < 21 && GameValue.level > 10)
         {
-            seed = .8f;
+            seed = 1f;
         }
         else if (GameValue.level < 31 && GameValue.level > 20)
         {
-            seed = 1f;
+            seed = 1.5f;
         }
         else if (GameValue.level < 41 && GameValue.level > 30)
         {
-            seed = 1.4f;
+            seed = 1.8f;
         }
 
         SetVariableValue("CounchTime", crouchTimeMax - 0.06f * GameValue.level);

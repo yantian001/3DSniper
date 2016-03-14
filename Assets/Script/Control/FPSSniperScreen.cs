@@ -28,11 +28,6 @@ public class FPSSniperScreen : MonoBehaviour
         ScreenSlider.gameObject.SetActive(zoomed);
     }
 
-    public void OnEnable()
-    {
-        
-    }
-
    public void SliderDelta(float delta)
     {
         int plus = 0;
@@ -61,7 +56,10 @@ public class FPSSniperScreen : MonoBehaviour
             {
                 InScreen.SetActive(true);
                 ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
-                ScreenSlider.gameObject.SetActive(true);
+                if(gunHandler.CurrentGun.ZoomFOVLists.Length > 1)
+                {
+                    ScreenSlider.gameObject.SetActive(true);
+                }
                 zoomed = true;
             }
           

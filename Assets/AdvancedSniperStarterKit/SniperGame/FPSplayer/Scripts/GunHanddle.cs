@@ -22,13 +22,36 @@ public class GunHanddle : MonoBehaviour
             if (FPScamera)
                 Guns[i].NormalCamera = FPScamera;
             Guns[i].fovTemp = FPScamera.fieldOfView;
+            Guns[i].positionTemp = Guns[i].transform.localPosition;
         }
         SwitchGun();
+        LeanTween.addListener((int)Events.GAMEFINISH, OnGameFinish);
     }
 
-    void Update()
+    public void OnDisable()
     {
+        LeanTween.removeListener((int)Events.GAMEFINISH, OnGameFinish);
 
+    }
+
+
+    void OnGameFinish(LTEvent evt)
+    {
+        if (evt.data != null)
+        {
+            GameRecords record = evt.data as GameRecords;
+            if (record != null)
+            {
+                if (record.FinishType == GameFinishType.Failed)
+                {
+                    //hide gun
+                    for(int i= 0;i<Guns.Length;i++)
+                    {
+                        Guns[GunIndex].SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
     void Hide(GameObject gameObject, bool show)

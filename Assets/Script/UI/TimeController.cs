@@ -53,4 +53,9 @@ public class TimeController : MonoBehaviour
     {
         return currentTime;
     }
+
+    public void SetTimeLeft(int left = 0)
+    {
+        currentTime = left;
+    }
 }

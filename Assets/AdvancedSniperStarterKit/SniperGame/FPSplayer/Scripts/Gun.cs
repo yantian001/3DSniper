@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
     public float fovTemp;
     private float cooldowntime = 0;
     private Quaternion rotationTemp;
-    private Vector3 positionTemp;
+    public Vector3 positionTemp;
     public string IdlePose = "Idle";
     public string ShootPose = "Shoot";
     public string ReloadPose = "Reload";
@@ -81,16 +81,6 @@ public class Gun : MonoBehaviour
     void Awake()
     {
         rotationTemp = this.transform.localRotation;
-        //if (gameObject.name == "M24_Gun")
-        //{
-        //     positionTemp = new Vector3(0f, 0.17f, 0f); ;
-        //}
-        //else
-        //{
-        positionTemp = this.transform.localPosition;
-        //positionTemp = new Vector3(0.1889963f, -0.08400011f, 0.3230037f);
-       // positionTemp = new Vector3(0f, 0.17f, 0f); ;
-        //}
         this.transform.localPosition = positionTemp - (Vector3.up);
 
     }

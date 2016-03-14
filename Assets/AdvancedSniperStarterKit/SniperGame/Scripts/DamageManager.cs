@@ -30,7 +30,7 @@ public class DamageManager : MonoBehaviour
 		}
 		distancedamage = distance;
 		hp -= damage;
-        Debug.Log(damage);
+        //Debug.Log(damage);
 	}
 	
 	public void ApplyDamage (int damage, Vector3 velosity, float distance, int suffix)
@@ -68,22 +68,28 @@ public class DamageManager : MonoBehaviour
 	
 	public void Dead (int suffix)
 	{
-        if (!isEnemy)
-            return;
-		if (deadbody.Length > 0 && suffix >= 0 && suffix < deadbody.Length) {
-			// this Object has removed by Dead and replaced with Ragdoll. the ObjectLookAt will null and ActionCamera will stop following and looking.
-			// so we have to update ObjectLookAt to this Ragdoll replacement. then ActionCamera to continue fucusing on it.
-			GameObject deadReplace = (GameObject)Instantiate (deadbody [suffix], this.transform.position, this.transform.rotation);
-			// copy all of transforms to dead object replaced
-			CopyTransformsRecurse (this.transform, deadReplace);
-			// destroy dead object replaced after 5 sec
-			Destroy (deadReplace, 5);
-			// destry this game object.
-			Destroy (this.gameObject,1);
-			this.gameObject.SetActive(false);
-		
-		}
-		AfterDead (suffix);
+        if (isEnemy)
+        {
+            if (deadbody.Length > 0 && suffix >= 0 && suffix < deadbody.Length)
+            {
+                // this Object has removed by Dead and replaced with Ragdoll. the ObjectLookAt will null and ActionCamera will stop following and looking.
+                // so we have to update ObjectLookAt to this Ragdoll replacement. then ActionCamera to continue fucusing on it.
+                GameObject deadReplace = (GameObject)Instantiate(deadbody[suffix], this.transform.position, this.transform.rotation);
+                // copy all of transforms to dead object replaced
+                CopyTransformsRecurse(this.transform, deadReplace);
+                // destroy dead object replaced after 5 sec
+                Destroy(deadReplace, 5);
+                // destry this game object.
+                Destroy(this.gameObject, 1);
+                this.gameObject.SetActive(false);
+
+            }
+            AfterDead(suffix);
+        }
+        else
+        {
+            LeanTween.rotateZ(transform.root.gameObject, 90, 0.5f);
+        }
 	}
 	
 	// Copy all transforms to Ragdoll object

@@ -14,6 +14,8 @@ public class EnemyShoot : MonoBehaviour
 
     public float spread;
 
+    public GameObject muzzleEffect;
+
     public void Start()
     {
         targetTranform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -61,6 +63,14 @@ public class EnemyShoot : MonoBehaviour
             asbullet.Damage = Mathf.RoundToInt( ConvertUtil.ToFloat( vals[1].Value.value.GetValue()));
             float spr = ConvertUtil.ToFloat( vals[0].Value.value.GetValue());
             b.transform.forward = (targetTranform.position - firePosition.position + new Vector3(Random.Range(-spr, spr), Random.Range(-spr, spr), Random.Range(-spr, spr))).normalized;
+        }
+
+        if(muzzleEffect && firePosition)
+        {
+            var muzzle = (GameObject)GameObject.Instantiate(muzzleEffect, firePosition.position, firePosition.rotation);
+            muzzle.transform.SetParent(firePosition);
+            muzzle.transform.localScale = new Vector3(10, 10, 10);
+            Destroy(muzzle, 0.1f);
         }
     }
 }
