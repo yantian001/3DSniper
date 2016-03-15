@@ -24,7 +24,7 @@ public class MoneyHandler : MonoBehaviour
                 int m = edi.score;
                 if (edi.headShot)
                     m = Mathf.CeilToInt( m * headshotMult);
-                if (Camera.main.isActiveAndEnabled)
+                if (Camera.main != null && Camera.main.isActiveAndEnabled)
                 {
                     var pos = Camera.main.WorldToScreenPoint(edi.transform.position + new Vector3(0f, 2f, 0f));
                     var o = Instantiate(money, pos, Quaternion.identity) as GameObject;
