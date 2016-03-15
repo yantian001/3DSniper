@@ -23,6 +23,7 @@ public class Spwaner : MonoBehaviour
     void OnEnemyDie(LTEvent evt)
     {
         enemyCount--;
+        Debug.Log("Enemy Count:" + enemyCount.ToString());
     }
 
     // Use this for initialization
@@ -79,12 +80,6 @@ public class Spwaner : MonoBehaviour
         }
         int index = Random.Range(0, Enemys.Length);
         return Enemys[index];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     /// <summary>

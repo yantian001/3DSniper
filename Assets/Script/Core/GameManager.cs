@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void OnGameCompleted()
     {
-        // Debug.Log("Level Completed!");
+        Debug.Log("Level Completed!");
         ChangeGameStatu(GameStatu.Completed);
         record.FinishType = GameFinishType.Completed;
         GameFinish();

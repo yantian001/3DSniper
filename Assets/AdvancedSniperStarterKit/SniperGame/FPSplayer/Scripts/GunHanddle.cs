@@ -34,7 +34,6 @@ public class GunHanddle : MonoBehaviour
     public void OnDisable()
     {
         LeanTween.removeListener((int)Events.GAMEFINISH, OnGameFinish);
-
     }
 
 
