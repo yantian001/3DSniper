@@ -4,11 +4,31 @@ using System.Collections;
 public class GameValue
 {
 
+    public static string s_CurrentSceneName = "";
+
     public static int mapId = -1;
     /// <summary>
     /// current level
     /// </summary>
     public static int level = -1;
+
+    public static string GetMapSceneName()
+    {
+        if(mapId == 1)
+        {
+            return "changjing-1";
+        }
+        else if(mapId== 2)
+        {
+            return "changjing-2";
+
+        }
+        else if (mapId == 3)
+        {
+            return "changjing-3";
+        }
+        return "";
+    }
 
     public static int maxLevelPerMap = 40;
 

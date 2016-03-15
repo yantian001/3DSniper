@@ -1,5 +1,6 @@
 ﻿public enum Events
 {
+    NONE,
     /// <summary>
     /// 敌人死亡
     /// </summary>

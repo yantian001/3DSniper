@@ -23,12 +23,20 @@ public class FPSSniperScreen : MonoBehaviour
         {
             ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length-1;
           
-           // ScreenSlider.onValueChanged.AddListener(SliderDelta);
+            //ScreenSlider.onValueChanged.AddListener(SliderDelta);
         }
         ScreenSlider.gameObject.SetActive(zoomed);
     }
 
    public void SliderDelta(float delta)
+    {
+        int plus = 0;
+        plus = delta > currentDelta ? 1 : -1;
+        currentDelta = delta;
+        gunHandler.CurrentGun.ZoomDelta(plus);
+    }
+
+    public void SliderDelta(int delta)
     {
         int plus = 0;
         plus = delta > currentDelta ? 1 : -1;

@@ -96,7 +96,7 @@ public class Levels : MonoBehaviour
             item.transform.SetParent(theParent);
             item.transform.localScale = Vector3.one;
             var levelZone = item.transform.FindChild("Panel/LevelItems/LevelGrid").GetComponent<RectTransform>();
-
+            CommonUtils.SetChildRawImage(item.GetComponent<RectTransform>(), "MapIcon/Icon", Maps[i].MapIcon);
             if (levelZone)
             {
                 int levelCount = GameValue.GetMapLevelCount(Maps[i].MapId);

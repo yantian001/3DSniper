@@ -9,9 +9,9 @@ public class GameLogic : MonoBehaviour
     /// <summary>
     /// Loading界面
     /// </summary>
-    public int s_LoadingSceneId = 2;
-    public int s_MainMenuSceneId = 0;
-
+    public string s_LoadingScene = "Loading";
+    public string s_MenuScene = "Menu";
+    public string s_StartScene = "Start";
 
     private static GameLogic _logic = null;
 
@@ -83,13 +83,13 @@ public class GameLogic : MonoBehaviour
     void OnGameMainMenu(LTEvent evt)
     {
 
-        //GameGlobalValue.s_CurrentScene = s_MainMenuSceneId;
-        //bool isShowLoading = true;
-        //if(evt.data != null)
-        //{
-        //    bool.TryParse(evt.data.ToString(), out isShowLoading);
-        //}
-        Loading(false);
+        GameValue.s_CurrentSceneName = s_MenuScene;
+        bool isShowLoading = true;
+        if (evt.data != null)
+        {
+            bool.TryParse(evt.data.ToString(), out isShowLoading);
+        }
+        Loading(isShowLoading);
     }
 
     // Update is called once per frame
@@ -110,27 +110,27 @@ public class GameLogic : MonoBehaviour
 
     public void Loading(bool showLoading = true)
     {
-        //if (showLoading)
-        //    Application.LoadLevel(s_LoadingSceneId);
-        //else
-        //    Application.LoadLevel(GameGlobalValue.s_CurrentScene);
-        Application.LoadLevel("changjing-1");
-        Debug.Log("Loading...");
+        if (showLoading)
+            GameValue.s_CurrentSceneName = s_LoadingScene;
+        else
+            GameValue.s_CurrentSceneName = GameValue.GetMapSceneName();
+        Application.LoadLevel(GameValue.s_CurrentSceneName);
     }
 
 
     public void BackToStart(LTEvent evt)
     {
-       // GameGlobalValue.s_CurrentScene = 0;
+        // GameGlobalValue.s_CurrentScene = 0;
+        GameValue.s_CurrentSceneName = s_StartScene;
         Loading(false);
     }
 
     void Update()
     {
-        int levelIndex = Application.loadedLevel;
+        string levelIndex = Application.loadedLevelName;
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (levelIndex == 0)
+            if (levelIndex == s_StartScene)
             {
                 //if (ChartboostUtil.Instance.HasQuitInterstitial())
                 //{
@@ -148,11 +148,11 @@ public class GameLogic : MonoBehaviour
                 //}
 
             }
-            else if (levelIndex == s_MainMenuSceneId)
+            else if (levelIndex == s_MenuScene)
             {
                 BackToStart(null);
             }
-            else if (levelIndex == s_LoadingSceneId)
+            else if (levelIndex == s_LoadingScene)
             {
 
             }
