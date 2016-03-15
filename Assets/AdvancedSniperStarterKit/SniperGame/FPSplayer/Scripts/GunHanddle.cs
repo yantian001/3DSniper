@@ -22,7 +22,10 @@ public class GunHanddle : MonoBehaviour
             if (FPScamera)
                 Guns[i].NormalCamera = FPScamera;
             Guns[i].fovTemp = FPScamera.fieldOfView;
-            Guns[i].positionTemp = Guns[i].transform.localPosition;
+            if(Guns[i].positionTemp == Vector3.zero)
+            {
+                Guns[i].positionTemp = Guns[i].transform.localPosition;
+            }
         }
         SwitchGun();
         LeanTween.addListener((int)Events.GAMEFINISH, OnGameFinish);

@@ -53,7 +53,7 @@ public class GameLogic : MonoBehaviour
 
     private void OnGameStart(LTEvent obj)
     {
-        if(obj.data == null || ConvertUtil.ToBool(obj.data) == false)
+        if (obj.data == null || ConvertUtil.ToBool(obj.data) == false)
         {
             Loading(false);
         }
@@ -70,7 +70,7 @@ public class GameLogic : MonoBehaviour
 
     void OnGameNext(LTEvent evt)
     {
-        if (GameValue.IsMapLastLevel(GameValue.mapId,GameValue.level))
+        if (GameValue.IsMapLastLevel(GameValue.mapId, GameValue.level))
             OnGameMainMenu(evt);
         else
         {
@@ -110,11 +110,14 @@ public class GameLogic : MonoBehaviour
 
     public void Loading(bool showLoading = true)
     {
+        //GameValue.s_CurrentSceneName = GameValue.GetMapSceneName();
         if (showLoading)
-            GameValue.s_CurrentSceneName = s_LoadingScene;
+            Application.LoadLevel(s_LoadingScene);
         else
-            GameValue.s_CurrentSceneName = GameValue.GetMapSceneName();
-        Application.LoadLevel(GameValue.s_CurrentSceneName);
+        {
+           Application.LoadLevel(GameValue.s_CurrentSceneName);
+        }
+
     }
 
 

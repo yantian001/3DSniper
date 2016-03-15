@@ -63,7 +63,8 @@ public class MenuManager : MonoBehaviour
         {
             GameValue.level = Player.CurrentUser.GetSceneCurrentLevel(GameValue.mapId);
         }
-        LeanTween.dispatchEvent((int)Events.GAMESTART);
+        GameValue.s_CurrentSceneName = GameValue.GetMapSceneName();
+        LeanTween.dispatchEvent((int)Events.GAMESTART,true);
     }
 
     void OnButtonClicked(ButtonIndex bix)
