@@ -101,8 +101,8 @@ public class GameLogic : MonoBehaviour
     public void OnDisable()
     {
         // Debug.Log("OnDisable");
-        LeanTween.removeListener((int)Events.GAMERESTART, OnGameRestart);
-        LeanTween.removeListener((int)Events.GAMESTART, OnGameStart);
+        // LeanTween.removeListener((int)Events.GAMERESTART, OnGameRestart);
+        //  LeanTween.removeListener((int)Events.GAMESTART, OnGameStart);
         //LeanTween.removeListener((int)Events.MAINMENU, OnGameMainMenu);
         //LeanTween.removeListener((int)Events.BACKTOSTART, BackToStart);
         //LeanTween.removeListener((int)Events.GAMENEXT, OnGameNext);
@@ -115,7 +115,7 @@ public class GameLogic : MonoBehaviour
             Application.LoadLevel(s_LoadingScene);
         else
         {
-           Application.LoadLevel(GameValue.s_CurrentSceneName);
+            Application.LoadLevel(GameValue.s_CurrentSceneName);
         }
 
     }
