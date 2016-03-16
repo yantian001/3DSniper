@@ -220,15 +220,22 @@ public class Gun : MonoBehaviour
                 break;
             case 3:
                 // Start Reloading
-                if (GetComponent<Animation>()[ReloadPose] && (AmmoPack > 0 || InfinityAmmo))
+                if (GetComponent<Animation>()[ReloadPose] )
                 {
-                    GetComponent<Animation>().clip = GetComponent<Animation>()[ReloadPose].clip;
-                    GetComponent<Animation>().CrossFade(ReloadPose, 0.5f, PlayMode.StopAll);
-                    gunState = 4;
-                    Zooming = false;
-                    if (SoundReloadStart && audiosource != null)
+                    if ( AmmoPack > 0 || InfinityAmmo)
                     {
-                        audiosource.PlayOneShot(SoundReloadStart);
+                        GetComponent<Animation>().clip = GetComponent<Animation>()[ReloadPose].clip;
+                        GetComponent<Animation>().CrossFade(ReloadPose, 0.5f, PlayMode.StopAll);
+                        gunState = 4;
+                        Zooming = false;
+                        if (SoundReloadStart && audiosource != null)
+                        {
+                            audiosource.PlayOneShot(SoundReloadStart);
+                        }
+                    }
+                    else
+                    {
+                        gunState = 5;
                     }
                 }
                 else
@@ -261,8 +268,12 @@ public class Gun : MonoBehaviour
                             }
                             else
                             {
-                                Clip = AmmoPack;
-                                AmmoPack = 0;
+                                if (AmmoPack > 0)
+                                {
+                                    Clip = AmmoPack;
+                                    AmmoPack = 0;
+                                }
+
                             }
                         }
 
@@ -415,10 +426,11 @@ public class Gun : MonoBehaviour
                     {
                         Player.CurrentUser.BuyGunAmmo(id, -1);
                     }
+                    AmmoIn -= 1;
                     if (!SemiAuto)
                     {
                         gunState = 1;
-                        AmmoIn -= 1;
+                       
                     }
                     else
                     {
@@ -443,7 +455,7 @@ public class Gun : MonoBehaviour
                     }
                 }
 
-                if (Clip <= 0)
+                if (Clip <= 0 && AmmoIn <= 0)
                 {
                     gunState = 3;
                 }

@@ -9,6 +9,8 @@ public class GameFinish : MonoBehaviour
     public float scaleInTime = 0.5f;
 
     Vector3 localScale;
+    Vector2 tempPosition;
+
     public void OnEnable()
     {
         LeanTween.addListener((int)Events.GAMEFINISH, OnGameFinish);
@@ -23,7 +25,8 @@ public class GameFinish : MonoBehaviour
     {
         if (finish)
         {
-           // finish.transform.position = finish.transform.position + new Vector3(Screen.width, 0f, 0f);
+            // finish.transform.position = finish.transform.position + new Vector3(Screen.width, 0f, 0f);
+            tempPosition = finish.anchoredPosition;
             //localScale = finish.
         }
     }
@@ -39,7 +42,7 @@ public class GameFinish : MonoBehaviour
 
         SetDisplay(record);
 
-        finish.anchoredPosition = new Vector2(0f, 0f);
+        finish.anchoredPosition = Vector2.zero;
         var transformComplete = finish.FindChild("Complete");
         localScale = transformComplete.localScale;
         transformComplete.localScale = Vector3.zero;

@@ -175,6 +175,8 @@ public class Player : MonoBehaviour
         Level1Max = PlayerPrefs.GetInt("Level1", 0);
         Level2Max = PlayerPrefs.GetInt("Level2", 0);
         Level3Max = PlayerPrefs.GetInt("Level3", 0);
+       
+       // UseMoney(-10000);
        // UseMoney(-100000);
     }
 
