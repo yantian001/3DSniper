@@ -61,14 +61,14 @@ public class GameFinish : MonoBehaviour
         {
             CommonUtils.SetChildText(finish, "Complete/Title", "ENEMY WIN");
             CommonUtils.SetChildActive(finish, "Complete/ButtonNext", false);
-            CommonUtils.SetChildActive(finish, "Complete/ButtonShare", false);
+           // CommonUtils.SetChildActive(finish, "Complete/ButtonShare", false);
 
         }
         else if (record.FinishType == GameFinishType.TimeUp)
         {
             CommonUtils.SetChildText(finish, "Complete/Title", "TIME UP");
             CommonUtils.SetChildActive(finish, "Complete/ButtonNext", false);
-            CommonUtils.SetChildActive(finish, "Complete/ButtonShare", false);
+          //  CommonUtils.SetChildActive(finish, "Complete/ButtonShare", false);
         }
 
         CommonUtils.SetChildText(finish, "Complete/Scores/HeadShotTitle/Count", record.HeadShotCount.ToString());

@@ -44,11 +44,30 @@ public class GameLogic : MonoBehaviour
             LeanTween.addListener((int)Events.BACKTOSTART, BackToStart);
             LeanTween.addListener((int)Events.GAMENEXT, OnGameNext);
             LeanTween.addListener((int)Events.GAMESTART, OnGameStart);
+            LeanTween.addListener((int)Events.GAMEQUIT, OnGameQuit);
+            LeanTween.addListener((int)Events.GAMEMORE, OnGameMore);
+            LeanTween.addListener((int)Events.GAMERATE, OnGameRate);
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnGameRate(LTEvent obj)
+    {
+        //  throw new NotImplementedException();
+#if UNITY_ANDROID
+        Application.OpenURL("market://details?id=" + Application.bundleIdentifier);
+#elif UNITYS_IOS
+        Application.OpenURL("itms-apps://itunes.apple.com/app/id" + Application.bundleIdentifier)
+#endif
+    }
+
+    private void OnGameMore(LTEvent obj)
+    {
+        // throw new NotImplementedException();
+        ChartboostUtil.Instance.ShowMoreAppOnDefault();
     }
 
     private void OnGameStart(LTEvent obj)
@@ -101,8 +120,8 @@ public class GameLogic : MonoBehaviour
     public void OnDisable()
     {
         // Debug.Log("OnDisable");
-        LeanTween.removeListener((int)Events.GAMERESTART, OnGameRestart);
-        LeanTween.removeListener((int)Events.GAMESTART, OnGameStart);
+        //LeanTween.removeListener((int)Events.GAMERESTART, OnGameRestart);
+        // LeanTween.removeListener((int)Events.GAMESTART, OnGameStart);
         //LeanTween.removeListener((int)Events.MAINMENU, OnGameMainMenu);
         //LeanTween.removeListener((int)Events.BACKTOSTART, BackToStart);
         //LeanTween.removeListener((int)Events.GAMENEXT, OnGameNext);
@@ -115,7 +134,7 @@ public class GameLogic : MonoBehaviour
             Application.LoadLevel(s_LoadingScene);
         else
         {
-           Application.LoadLevel(GameValue.s_CurrentSceneName);
+            Application.LoadLevel(GameValue.s_CurrentSceneName);
         }
 
     }
@@ -135,20 +154,7 @@ public class GameLogic : MonoBehaviour
         {
             if (levelIndex == s_StartScene)
             {
-                //if (ChartboostUtil.Instance.HasQuitInterstitial())
-                //{
-                //    ChartboostUtil.Instance.ShowQuitInterstitial();
-                //    LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
-                //}
-                //else if (GoogleAdsUtil.Instance.HasInterstital())
-                //{
-                //    GoogleAdsUtil.Instance.ShowInterstital();
-                //    LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
-                //}
-                //else
-                //{
-                //    Application.Quit();
-                //}
+                OnGameQuit(null);
 
             }
             else if (levelIndex == s_MenuScene)
@@ -174,6 +180,24 @@ public class GameLogic : MonoBehaviour
                     OnGameMainMenu(null);
                 }
             }
+        }
+    }
+
+    void OnGameQuit(LTEvent evt)
+    {
+        if (ChartboostUtil.Instance.HasQuitInterstitial())
+        {
+            ChartboostUtil.Instance.ShowQuitInterstitial();
+            LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+        }
+        //else if (GoogleAdsUtil.Instance.HasInterstital())
+        //{
+        //    GoogleAdsUtil.Instance.ShowInterstital();
+        //    LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+        //}
+        else
+        {
+            Application.Quit();
         }
     }
 
