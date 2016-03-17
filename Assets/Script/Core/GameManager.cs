@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
 
     public GameStatu statu { get; private set; }
 
+    public AudioClip successAudio;
+
+    public AudioClip failAudio;
+
     GameRecords record = null;
     // Use this for initialization
     void Start()
@@ -165,6 +169,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Time Up!");
         ChangeGameStatu(GameStatu.Failed);
         record.FinishType = GameFinishType.TimeUp;
+        if (failAudio != null)
+            LeanAudio.play(failAudio);
         GameFinish();
     }
 
@@ -176,7 +182,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Level Completed!");
         ChangeGameStatu(GameStatu.Completed);
         record.FinishType = GameFinishType.Completed;
+        if (successAudio != null)
+            LeanAudio.play(successAudio);
         GameFinish();
+        
     }
 
     void OnPlayerDie()
@@ -185,6 +194,8 @@ public class GameManager : MonoBehaviour
         ChangeGameStatu(GameStatu.Failed);
         record.FinishType = GameFinishType.Failed;
         // timer.SetTimeLeft(0);
+        if (failAudio != null)
+            LeanAudio.play(failAudio);
         GameFinish();
     }
 
@@ -198,6 +209,12 @@ public class GameManager : MonoBehaviour
                 record.TimeLeft = 0;
         }
         LeanTween.dispatchEvent((int)Events.GAMEFINISH, record);
+        Invoke("DisplayAds", 0.5f);
+    }
+
+    void DisplayAds()
+    {
+        ChartboostUtil.Instance.ShowInterstitialOnDefault();
     }
 
     void OnPause(LTEvent evt)
@@ -208,6 +225,7 @@ public class GameManager : MonoBehaviour
         }
 
         LeanTween.addListener((int)Events.GAMECONTINUE, OnContinue);
+        Invoke("DisplayAds", 0.5f);
         // Time.timeScale = 0;
     }
 

@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetInt("Medikit", 0);
+            return PlayerPrefs.GetInt("Medikit", 2);
         }
         set
         {
@@ -171,13 +171,19 @@ public class Player : MonoBehaviour
 
     void Init()
     {
+        if(!PlayerPrefs.HasKey("money"))
+        {
+            UseMoney(-500);
+        }
+        if(!PlayerPrefs.HasKey("Medikit"))
+        {
+            Medikit = 2;
+        }
         Money = PlayerPrefs.GetInt("money", 0);
         Level1Max = PlayerPrefs.GetInt("Level1", 0);
         Level2Max = PlayerPrefs.GetInt("Level2", 0);
         Level3Max = PlayerPrefs.GetInt("Level3", 0);
-       
-       // UseMoney(-10000);
-       // UseMoney(-100000);
+
     }
 
     public void OnEnable()
@@ -340,10 +346,12 @@ public class Player : MonoBehaviour
         if(gunid == 2)
         {
             Gun2Active = 1;
+            Gun2Ammo = 10;
         }
         else if(gunid == 3)
         {
             Gun3Active = 1;
+            Gun3Ammo = 10;
         }
     }
 }

@@ -16,6 +16,8 @@ public class EnemyShoot : MonoBehaviour
 
     public GameObject muzzleEffect;
 
+    public AudioClip shootAudio;
+
     public void Start()
     {
         targetTranform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -71,6 +73,11 @@ public class EnemyShoot : MonoBehaviour
             muzzle.transform.SetParent(firePosition);
             muzzle.transform.localScale = new Vector3(10, 10, 10);
             Destroy(muzzle, 0.1f);
+        }
+
+        if(shootAudio)
+        {
+            LeanAudio.play(shootAudio, transform.position);
         }
     }
 }

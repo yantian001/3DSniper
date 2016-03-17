@@ -53,8 +53,15 @@ public class MenuManager : MonoBehaviour
         {
             ButtonPlay.onClick.AddListener(OnPlayClicked);
         }
+
+        Invoke("DisplayAds", 0.5f);
+
     }
 
+    void DisplayAds()
+    {
+        ChartboostUtil.Instance.ShowInterstitialOnHomescreen();
+    }
     void OnPlayClicked()
     {
         if (GameValue.mapId == -1)

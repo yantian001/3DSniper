@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     public AudioClip SoundBoltStart;
     public AudioClip SoundReloadStart;
     public AudioClip SoundReloadEnd;
+    public AudioClip SoundEmpty;
     public float MouseSensitive = 1;
     public bool Zooming;
     public bool SemiAuto;
@@ -461,7 +462,10 @@ public class Gun : MonoBehaviour
                 }
 
             }
-
+            else if(gunState == 5)
+            {
+                audiosource.PlayOneShot(SoundEmpty);
+            }
         }
     }
 

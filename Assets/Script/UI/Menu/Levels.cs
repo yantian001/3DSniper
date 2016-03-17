@@ -38,14 +38,19 @@ public class Levels : MonoBehaviour
         }
         positionTemp = theParent.anchoredPosition;
         InitLevels();
+        if (GameValue.mapId != -1)
+        {
+            currentMapIndex = GameValue.mapId - 1;
+        }
+
         if (currentMapIndex > 0)
         {
             if (currentMapIndex >= mapLength)
             {
                 currentMapIndex = currentMapIndex % mapLength;
             }
-
         }
+        Moveto(currentMapIndex);
     }
 
     public void Moveto(int index)
@@ -85,7 +90,7 @@ public class Levels : MonoBehaviour
         if (!theParent || Maps == null || !LevelItem || !LevelButtonItem)
             return;
         theParent.DetachChildren();
-       // width = LevelItem.GetComponent<RectTransform>().sizeDelta.x;
+        // width = LevelItem.GetComponent<RectTransform>().sizeDelta.x;
         var layoutGroup = theParent.GetComponent<HorizontalLayoutGroup>();
         float totalWidth = layoutGroup.spacing * (Maps.Length - 1) + Maps.Length * width + layoutGroup.padding.left + layoutGroup.padding.right;
         theParent.sizeDelta = new Vector2(totalWidth, theParent.sizeDelta.y);
@@ -118,7 +123,7 @@ public class Levels : MonoBehaviour
                     var button = levelItem.GetComponent<Button>();
                     if (button)
                     {
-                        bool isUnlocked = Player.CurrentUser.IsLevelUnlocked(Maps[i].MapId, j+1);
+                        bool isUnlocked = Player.CurrentUser.IsLevelUnlocked(Maps[i].MapId, j + 1);
                         button.interactable = isUnlocked;
                         if (isUnlocked)
                         {
@@ -128,11 +133,11 @@ public class Levels : MonoBehaviour
                 }
                 //移动到当前关所在位子
                 int levelCurrent = Player.CurrentUser.GetSceneCurrentLevel(Maps[i].MapId);
-                if(levelCurrent > 15)
+                if (levelCurrent > 15)
                 {
                     int currentRow = Mathf.FloorToInt((float)levelCurrent / col);
-                    levelZone.anchoredPosition = new Vector2(levelZone.anchoredPosition.x, (currentRow -1) * gridGroup.cellSize.y + gridGroup.padding.top + (currentRow - 1) * gridGroup.spacing.y);
-                } 
+                    levelZone.anchoredPosition = new Vector2(levelZone.anchoredPosition.x, (currentRow - 1) * gridGroup.cellSize.y + gridGroup.padding.top + (currentRow - 1) * gridGroup.spacing.y);
+                }
             }
         }
 
@@ -147,11 +152,5 @@ public class Levels : MonoBehaviour
             GameValue.level = ConvertUtil.ToInt32(text.text, -1);
             Debug.Log(GameValue.level);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
