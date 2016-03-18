@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 290047fd36e1f8e42b3fe759d617cbc7
-timeCreated: 1456285519
+guid: 83ade0a7ae856294283a1da60a68e7d9
+timeCreated: 1457084000
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
@@ -35,7 +35,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
@@ -54,7 +54,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -69,7 +69,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
