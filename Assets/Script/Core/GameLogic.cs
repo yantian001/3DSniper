@@ -61,7 +61,7 @@ public class GameLogic : MonoBehaviour
 #if UNITY_ANDROID
         Application.OpenURL("market://details?id=" + Application.bundleIdentifier);
 #elif UNITY_IOS
-        Application.OpenURL("itms-apps://itunes.apple.com/app/id" + s_iOSId)
+        Application.OpenURL("itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + s_iOSId);
 #endif
     }
 
