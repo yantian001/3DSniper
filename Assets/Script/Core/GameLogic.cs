@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour
     public string s_LoadingScene = "Loading";
     public string s_MenuScene = "Menu";
     public string s_StartScene = "Start";
+    public string s_iOSId = "1041667864";
 
     private static GameLogic _logic = null;
 
@@ -59,8 +60,8 @@ public class GameLogic : MonoBehaviour
         //  throw new NotImplementedException();
 #if UNITY_ANDROID
         Application.OpenURL("market://details?id=" + Application.bundleIdentifier);
-#elif UNITYS_IOS
-        Application.OpenURL("itms-apps://itunes.apple.com/app/id" + Application.bundleIdentifier)
+#elif UNITY_IOS
+        Application.OpenURL("itms-apps://itunes.apple.com/app/id" + s_iOSId)
 #endif
     }
 
