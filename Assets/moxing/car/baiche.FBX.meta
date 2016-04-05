@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f665d4733536db7419397c9ad13ab424
-timeCreated: 1456308817
+guid: 6a835c550a7bb1c45acd1fe5daa9ac1c
+timeCreated: 1459848830
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
@@ -9,8 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: polySurface324
-    9500000: //RootNode
+    4300000: yzh-qc-891
+    6400000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -35,8 +35,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 3
-    addColliders: 0
+    meshCompression: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
