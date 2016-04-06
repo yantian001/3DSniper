@@ -1,23 +1,34 @@
 fileFormatVersion: 2
-guid: edae50797c3e2104a81e1d7f3171adf7
-timeCreated: 1459920109
+guid: c2dacd1aaab0fd549a182497f2cedc1f
+timeCreated: 1459925479
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Exported_Mesh_Combined_Mesh
+    100002: tree2_leafs
+    100004: tree2_leafs_flip
+    100006: tree2_trunk
     400000: //RootNode
-    400002: Exported_Mesh_Combined_Mesh
-    2300000: Exported_Mesh_Combined_Mesh
-    3300000: Exported_Mesh_Combined_Mesh
-    4300000: Exported_Mesh_Combined_Mesh
+    400002: tree2_leafs
+    400004: tree2_leafs_flip
+    400006: tree2_trunk
+    2300000: tree2_leafs
+    2300002: tree2_leafs_flip
+    2300004: tree2_trunk
+    3300000: tree2_leafs
+    3300002: tree2_leafs_flip
+    3300004: tree2_trunk
+    4300000: tree2_trunk
+    4300002: tree2_leafs
+    4300004: tree2_leafs_flip
+    9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 0
+    legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
