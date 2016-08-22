@@ -18,17 +18,17 @@ public class FPSSniperScreen : MonoBehaviour
     void Start()
     {
         //gunHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<GunHanddle>();
-        gunHandler = FindObjectOfType ( typeof(GunHanddle) ) as GunHanddle;
+        gunHandler = FindObjectOfType(typeof(GunHanddle)) as GunHanddle;
         if (ScreenSlider != null && gunHandler.CurrentGun != null)
         {
-            ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length-1;
-          
+            ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
+
             //ScreenSlider.onValueChanged.AddListener(SliderDelta);
         }
         ScreenSlider.gameObject.SetActive(zoomed);
     }
 
-   public void SliderDelta(float delta)
+    public void SliderDelta(float delta)
     {
         int plus = 0;
         plus = delta > currentDelta ? 1 : -1;
@@ -57,26 +57,26 @@ public class FPSSniperScreen : MonoBehaviour
         if (gunHandler == null || gunHandler.CurrentGun == null)
             return;
 
-       
+
         if (gunHandler.CurrentGun.Zooming)
         {
-            if(zoomed == false)
+            if (zoomed == false)
             {
                 InScreen.SetActive(true);
                 ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
-                if(gunHandler.CurrentGun.ZoomFOVLists.Length > 1)
+                if (gunHandler.CurrentGun.ZoomFOVLists.Length > 1)
                 {
                     ScreenSlider.gameObject.SetActive(true);
                 }
                 zoomed = true;
             }
-          
+
             //ScreenSlider.value = 0;
             //currentDelta = 0;
         }
         else
         {
-            if(zoomed)
+            if (zoomed)
             {
                 InScreen.SetActive(false);
                 ScreenSlider.gameObject.SetActive(false);
@@ -84,8 +84,6 @@ public class FPSSniperScreen : MonoBehaviour
                 currentDelta = 0;
                 zoomed = false;
             }
-           
-
         }
     }
 }

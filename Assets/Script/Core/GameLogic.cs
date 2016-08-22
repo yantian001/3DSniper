@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using Ads = FUGSDK.Ads;
 public class GameLogic : MonoBehaviour
 {
 
@@ -68,7 +68,8 @@ public class GameLogic : MonoBehaviour
     private void OnGameMore(LTEvent obj)
     {
         // throw new NotImplementedException();
-        ChartboostUtil.Instance.ShowMoreAppOnDefault();
+        //ChartboostUtil.Instance.ShowMoreAppOnDefault();
+        Ads.Instance.ShowMoreApp();
     }
 
     private void OnGameStart(LTEvent obj)
@@ -186,11 +187,15 @@ public class GameLogic : MonoBehaviour
 
     void OnGameQuit(LTEvent evt)
     {
-        if (ChartboostUtil.Instance.HasQuitInterstitial())
+        if(Ads.Instance.HasIntersititial())
         {
-            ChartboostUtil.Instance.ShowQuitInterstitial();
-            LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+            Ads.Instance.ShowInterstitial(OnInterstitialClosed);
         }
+        //if (ChartboostUtil.Instance.HasQuitInterstitial())
+        //{
+        //    ChartboostUtil.Instance.ShowQuitInterstitial();
+        //    LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+        //}
         //else if (GoogleAdsUtil.Instance.HasInterstital())
         //{
         //    GoogleAdsUtil.Instance.ShowInterstital();
@@ -202,7 +207,7 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    public void OnInterstitialClosed(LTEvent evt)
+    public void OnInterstitialClosed()
     {
         Application.Quit();
     }

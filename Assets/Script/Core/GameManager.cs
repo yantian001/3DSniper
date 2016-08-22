@@ -214,7 +214,8 @@ public class GameManager : MonoBehaviour
 
     void DisplayAds()
     {
-        ChartboostUtil.Instance.ShowInterstitialOnDefault();
+        //ChartboostUtil.Instance.ShowInterstitialOnDefault();
+        FUGSDK.Ads.Instance.ShowInterstitial();
     }
 
     void OnPause(LTEvent evt)

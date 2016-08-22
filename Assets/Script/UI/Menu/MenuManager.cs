@@ -60,7 +60,8 @@ public class MenuManager : MonoBehaviour
 
     void DisplayAds()
     {
-        ChartboostUtil.Instance.ShowInterstitialOnHomescreen();
+        // ChartboostUtil.Instance.ShowInterstitialOnHomescreen();
+        FUGSDK.Ads.Instance.ShowInterstitial();
     }
     void OnPlayClicked()
     {
