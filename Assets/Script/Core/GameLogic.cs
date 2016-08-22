@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using Ads = FUGSDK.Ads;
 public class GameLogic : MonoBehaviour
 {
 
@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour
     public string s_LoadingScene = "Loading";
     public string s_MenuScene = "Menu";
     public string s_StartScene = "Start";
+    public string s_iOSId = "1041667864";
 
     private static GameLogic _logic = null;
 
@@ -59,15 +60,16 @@ public class GameLogic : MonoBehaviour
         //  throw new NotImplementedException();
 #if UNITY_ANDROID
         Application.OpenURL("market://details?id=" + Application.bundleIdentifier);
-#elif UNITYS_IOS
-        Application.OpenURL("itms-apps://itunes.apple.com/app/id" + Application.bundleIdentifier)
+#elif UNITY_IOS
+       Application.OpenURL("itms-apps://itunes.apple.com/app/id" + s_iOSId);
 #endif
     }
 
     private void OnGameMore(LTEvent obj)
     {
         // throw new NotImplementedException();
-        ChartboostUtil.Instance.ShowMoreAppOnDefault();
+        //ChartboostUtil.Instance.ShowMoreAppOnDefault();
+        Ads.Instance.ShowMoreApp();
     }
 
     private void OnGameStart(LTEvent obj)
@@ -185,11 +187,15 @@ public class GameLogic : MonoBehaviour
 
     void OnGameQuit(LTEvent evt)
     {
-        if (ChartboostUtil.Instance.HasQuitInterstitial())
+        if(Ads.Instance.HasIntersititial())
         {
-            ChartboostUtil.Instance.ShowQuitInterstitial();
-            LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+            Ads.Instance.ShowInterstitial(OnInterstitialClosed);
         }
+        //if (ChartboostUtil.Instance.HasQuitInterstitial())
+        //{
+        //    ChartboostUtil.Instance.ShowQuitInterstitial();
+        //    LeanTween.addListener((int)Events.INTERSTITIALCLOSED, OnInterstitialClosed);
+        //}
         //else if (GoogleAdsUtil.Instance.HasInterstital())
         //{
         //    GoogleAdsUtil.Instance.ShowInterstital();
@@ -201,7 +207,7 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    public void OnInterstitialClosed(LTEvent evt)
+    public void OnInterstitialClosed()
     {
         Application.Quit();
     }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d1bd3de6cdefb274090a985e2bbac2af
-timeCreated: 1456292083
+guid: fcba24fe341ea4a4db692bb9146c2b13
+timeCreated: 1459837398
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
@@ -10,6 +10,8 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: polySurface196
+    4300002: polySurface197
+    6400000: //RootNode
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -35,8 +37,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 3
-    addColliders: 0
+    meshCompression: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -54,7 +56,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []

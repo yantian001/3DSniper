@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ef211ddd5b66d094c95feaae99823004
-timeCreated: 1456215418
+timeCreated: 1459938422
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
@@ -31,7 +31,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
