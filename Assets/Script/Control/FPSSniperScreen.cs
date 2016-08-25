@@ -19,21 +19,23 @@ public class FPSSniperScreen : MonoBehaviour
     {
         //gunHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<GunHanddle>();
         gunHandler = FindObjectOfType(typeof(GunHanddle)) as GunHanddle;
-        if (ScreenSlider != null && gunHandler.CurrentGun != null)
-        {
-            ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
+        //if (ScreenSlider != null && gunHandler.CurrentGun != null)
+        //{
+        //    //ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
+        //    ScreenSlider.maxValue = gunHandler.CurrentGun.maxMulti;
 
-            //ScreenSlider.onValueChanged.AddListener(SliderDelta);
-        }
+        //    //ScreenSlider.onValueChanged.AddListener(SliderDelta);
+        //}
         ScreenSlider.gameObject.SetActive(zoomed);
     }
 
     public void SliderDelta(float delta)
     {
-        int plus = 0;
-        plus = delta > currentDelta ? 1 : -1;
-        currentDelta = delta;
-        gunHandler.CurrentGun.ZoomDelta(plus);
+        //int plus = 0;
+        //plus = delta > currentDelta ? 1 : -1;
+        //currentDelta = delta;
+        //gunHandler.CurrentGun.ZoomDelta(plus);
+        gunHandler.CurrentGun.ZoomDelta(delta);
     }
 
     public void SliderDelta(int delta)
@@ -63,7 +65,7 @@ public class FPSSniperScreen : MonoBehaviour
             if (zoomed == false)
             {
                 InScreen.SetActive(true);
-                ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
+                //ScreenSlider.maxValue = gunHandler.CurrentGun.ZoomFOVLists.Length - 1;
                 if (gunHandler.CurrentGun.ZoomFOVLists.Length > 1)
                 {
                     ScreenSlider.gameObject.SetActive(true);
