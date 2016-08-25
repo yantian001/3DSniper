@@ -16,6 +16,22 @@ public class Gun : MonoBehaviour
     public float FireRate = 0.2f;
     public float KickPower = 10;
     public float[] ZoomFOVLists;
+    /// <summary>
+    /// 初始化的狙击FOV,
+    /// </summary>
+    public float ZoomFOV = 50f;
+    /// <summary>
+    /// 当前的FOV ,= zoomFOV - maxMult * sense * forPerMulti
+    /// </summary>
+    public float currentFOV = 50f;
+    /// <summary>
+    /// 最大的狙击倍数
+    /// </summary>
+    public float maxMulti = 4f;
+    /// <summary>
+    /// 狙击镜每增加一倍 ,fov减少的值
+    /// </summary>
+    public float fovPerMulti = 2f;
     public int IndexZoom = 0;
     public Vector2 Offset = Vector2.zero;
     public float CooldownTime = 0.8f;
@@ -221,9 +237,9 @@ public class Gun : MonoBehaviour
                 break;
             case 3:
                 // Start Reloading
-                if (GetComponent<Animation>()[ReloadPose] )
+                if (GetComponent<Animation>()[ReloadPose])
                 {
-                    if ( AmmoPack > 0 || InfinityAmmo)
+                    if (AmmoPack > 0 || InfinityAmmo)
                     {
                         GetComponent<Animation>().clip = GetComponent<Animation>()[ReloadPose].clip;
                         GetComponent<Animation>().CrossFade(ReloadPose, 0.5f, PlayMode.StopAll);
@@ -315,8 +331,8 @@ public class Gun : MonoBehaviour
         {
             if (ZoomFOVLists.Length > 0)
             {
-                MouseSensitiveZoom = ((MouseSensitive * 0.16f) / 10) * ZoomFOVLists[IndexZoom];
-                NormalCamera.GetComponent<Camera>().fieldOfView += (ZoomFOVLists[IndexZoom] - NormalCamera.GetComponent<Camera>().fieldOfView) / 10;
+                MouseSensitiveZoom = ((MouseSensitive * 0.16f) / 10) * currentFOV;
+                NormalCamera.GetComponent<Camera>().fieldOfView += (currentFOV - NormalCamera.GetComponent<Camera>().fieldOfView) / 10;
             }
         }
         else
@@ -356,6 +372,15 @@ public class Gun : MonoBehaviour
         }
     }
 
+    public void ZoomDelta(float delta)
+    {
+        if (!Active)
+            return;
+        Zooming = true;
+        delta = Mathf.Min(1, Mathf.Max(0, delta));
+        currentFOV = Mathf.Max(0, ZoomFOV - maxMulti * delta * fovPerMulti);
+    }
+
     public void Reload()
     {
         if (gunState == 0)
@@ -378,13 +403,22 @@ public class Gun : MonoBehaviour
         if (IndexZoom < ZoomFOVLists.Length - 1)
         {
             IndexZoom += 1;
+            currentFOV = ZoomFOVLists[IndexZoom];
         }
         else
         {
             Zooming = false;
             IndexZoom = 0;
+            currentFOV = ZoomFOVLists[IndexZoom];
         }
 
+    }
+
+    public void ZoomToggle(float sense)
+    {
+        Zooming = true;
+        sense = Mathf.Min(1, Mathf.Max(0, sense));
+        currentFOV = ZoomFOV - maxMulti * sense * fovPerMulti;
     }
 
     public void OffsetAdjust(Vector2 adj)
@@ -431,7 +465,7 @@ public class Gun : MonoBehaviour
                     if (!SemiAuto)
                     {
                         gunState = 1;
-                       
+
                     }
                     else
                     {
@@ -462,7 +496,7 @@ public class Gun : MonoBehaviour
                 }
 
             }
-            else if(gunState == 5)
+            else if (gunState == 5)
             {
                 audiosource.PlayOneShot(SoundEmpty);
             }
