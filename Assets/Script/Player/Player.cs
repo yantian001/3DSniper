@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -145,7 +146,7 @@ public class Player : MonoBehaviour
         }
         private set
         {
-
+            _instance = value;
         }
     }
 
@@ -153,6 +154,12 @@ public class Player : MonoBehaviour
     {
         PlayerPrefs.SetInt(key, val);
         PlayerPrefs.Save();
+    }
+
+    public bool IsMoneyEnough(int v)
+    {
+        //throw new NotImplementedException();
+        return Money >= v;
     }
 
     public void Awake()
@@ -171,11 +178,11 @@ public class Player : MonoBehaviour
 
     void Init()
     {
-        if(!PlayerPrefs.HasKey("money"))
+        if (!PlayerPrefs.HasKey("money"))
         {
             UseMoney(-500);
         }
-        if(!PlayerPrefs.HasKey("Medikit"))
+        if (!PlayerPrefs.HasKey("Medikit"))
         {
             Medikit = 2;
         }
@@ -293,49 +300,49 @@ public class Player : MonoBehaviour
         else if (gunid == 3)
             return Gun3Active == 1;
         return false;
-           
+
     }
 
     public int GetMaterialCount(int id)
     {
-        if(id == 101)
+        if (id == 101)
         {
             return Medikit;
         }
-        else if(id == 102)
+        else if (id == 102)
         {
             return BombCount;
         }
-        else if(id == 1)
+        else if (id == 1)
         {
             return 0;
         }
-        else if(id == 2)
+        else if (id == 2)
         {
             return Gun2Ammo;
         }
-        else if(id == 3)
+        else if (id == 3)
         {
             return Gun3Ammo;
         }
         return 0;
     }
 
-    public void BuyGunAmmo(int gunid , int count)
+    public void BuyGunAmmo(int gunid, int count)
     {
-        if(gunid == 2)
+        if (gunid == 2)
         {
             Gun2Ammo += count;
         }
-        else if(gunid == 3)
+        else if (gunid == 3)
         {
             Gun3Ammo += count;
         }
-        else if(gunid == 101)
+        else if (gunid == 101)
         {
             Medikit += count;
         }
-        else if(gunid == 102)
+        else if (gunid == 102)
         {
             BombCount += count;
         }
@@ -343,12 +350,12 @@ public class Player : MonoBehaviour
 
     public void BuyGun(int gunid)
     {
-        if(gunid == 2)
+        if (gunid == 2)
         {
             Gun2Active = 1;
             Gun2Ammo = 10;
         }
-        else if(gunid == 3)
+        else if (gunid == 3)
         {
             Gun3Active = 1;
             Gun3Ammo = 10;
