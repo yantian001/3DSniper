@@ -38,13 +38,13 @@ public class FPSSniperScreen : MonoBehaviour
         gunHandler.CurrentGun.ZoomDelta(delta);
     }
 
-    public void SliderDelta(int delta)
-    {
-        int plus = 0;
-        plus = delta > currentDelta ? 1 : -1;
-        currentDelta = delta;
-        gunHandler.CurrentGun.ZoomDelta(plus);
-    }
+    //public void SliderDelta(int delta)
+    //{
+    //    int plus = 0;
+    //    plus = delta > currentDelta ? 1 : -1;
+    //    currentDelta = delta;
+    //    gunHandler.CurrentGun.ZoomDelta(plus);
+    //}
 
     public void OnDisable()
     {

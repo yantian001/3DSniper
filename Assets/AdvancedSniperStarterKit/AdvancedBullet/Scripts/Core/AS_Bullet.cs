@@ -258,11 +258,11 @@ public class AS_Bullet : MonoBehaviour
 
             GameObject hitparticle = null;
 
-            if (hit.collider.GetComponent<Rigidbody>())
-            {
-                hit.collider.GetComponent<Rigidbody>().AddForce(direction * HitForce, ForceMode.Force);
-
-            }
+            //if (hit.collider.GetComponent<Rigidbody>())
+            //{
+            //    hit.collider.GetComponent<Rigidbody>().AddForce(direction * HitForce, ForceMode.Force);
+            //    Debug.Log("Add force :" + direction * HitForce);
+            //}
 
             if (hit.collider.gameObject.GetComponent<AS_BulletHiter>())
             {

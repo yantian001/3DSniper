@@ -12,6 +12,7 @@ public class DamageManager : MonoBehaviour
 	private float distancedamage;
 
     public bool isEnemy = true;
+    bool isDie = false;
 	
 	void Start(){
 		
@@ -70,19 +71,32 @@ public class DamageManager : MonoBehaviour
 	{
         if (isEnemy)
         {
+            if (isDie) return;
             if (deadbody.Length > 0 && suffix >= 0 && suffix < deadbody.Length)
             {
                 // this Object has removed by Dead and replaced with Ragdoll. the ObjectLookAt will null and ActionCamera will stop following and looking.
                 // so we have to update ObjectLookAt to this Ragdoll replacement. then ActionCamera to continue fucusing on it.
-                GameObject deadReplace = (GameObject)Instantiate(deadbody[suffix], this.transform.position, this.transform.rotation);
-                // copy all of transforms to dead object replaced
-                CopyTransformsRecurse(this.transform, deadReplace);
-                // destroy dead object replaced after 5 sec
-                Destroy(deadReplace, 5);
-                // destry this game object.
-                Destroy(this.gameObject, 1);
-                this.gameObject.SetActive(false);
-
+                //GameObject deadReplace = (GameObject)Instantiate(deadbody[suffix], this.transform.position, this.transform.rotation);
+                //// copy all of transforms to dead object replaced
+                //CopyTransformsRecurse(this.transform, deadReplace);
+                //// destroy dead object replaced after 5 sec
+                //Destroy(deadReplace, 5);
+                //// destry this game object.
+                //Destroy(this.gameObject, 1);
+                //this.gameObject.SetActive(false);
+                var o = gameObject;
+                var anim = o.GetComponent<Animator>();
+                var agent = o.GetComponent<NavMeshAgent>();
+                var behavoir = o.GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
+                behavoir.enabled = false;
+                agent.enabled = false;
+                anim.enabled = false;
+                Rigidbody[] rigs = o.GetComponentsInChildren<Rigidbody>();
+                foreach (var rig in rigs)
+                {
+                    rig.isKinematic = false;
+                }
+                isDie = true;
             }
             AfterDead(suffix);
         }

@@ -47,12 +47,16 @@ public class FPSInputMobileController : MonoBehaviour
             gunHanddle.Zoom();
         }
 
-        if(CnInputManager.GetButtonDown(fireButtom))
+        if (CnInputManager.GetButtonDown(fireButtom))
         {
             gunHanddle.Shoot();
         }
 
-        if (CnInputManager.GetButtonDown(switchButton))
+        //if (CnInputManager.GetButtonDown(switchButton))
+        //{
+        //    gunHanddle.SwitchGun();
+        //}
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             gunHanddle.SwitchGun();
         }
