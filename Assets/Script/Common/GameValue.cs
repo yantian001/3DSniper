@@ -16,7 +16,7 @@ public class GameValue
     {
         if(mapId == 1)
         {
-            return "changjing-1";
+            return "changjing1";
         }
         else if(mapId== 2)
         {
