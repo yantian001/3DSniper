@@ -20,7 +20,7 @@ public class GameValue
         }
         else if(mapId== 2)
         {
-            return "changjing-2";
+            return "changjing2";
 
         }
         else if (mapId == 3)

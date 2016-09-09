@@ -52,13 +52,13 @@ public class FPSInputMobileController : MonoBehaviour
             gunHanddle.Shoot();
         }
 
-        //if (CnInputManager.GetButtonDown(switchButton))
-        //{
-        //    gunHanddle.SwitchGun();
-        //}
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (CnInputManager.GetButtonDown(switchButton))
         {
             gunHanddle.SwitchGun();
         }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    gunHanddle.SwitchGun();
+        //}
     }
 }

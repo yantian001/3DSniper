@@ -24,23 +24,23 @@ public class BahaviorGlobalVariables : MonoBehaviour
         float seed = 1f;
         if (GameValue.level < 4)
         {
-            seed = .6f;
+            seed = 1f;
         }
         else if (GameValue.level < 11 && GameValue.level > 3)
         {
-            seed = .7f;
+            seed = 1.1f;
         }
         else if (GameValue.level < 21 && GameValue.level > 10)
         {
-            seed = 1f;
+            seed = 1.3f;
         }
         else if (GameValue.level < 31 && GameValue.level > 20)
         {
-            seed = 1.5f;
+            seed = 1.7f;
         }
         else if (GameValue.level < 41 && GameValue.level > 30)
         {
-            seed = 1.8f;
+            seed = 2f;
         }
 
         SetVariableValue("CounchTime", crouchTimeMax - 0.06f * GameValue.level);
