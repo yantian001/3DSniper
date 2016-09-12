@@ -74,6 +74,7 @@ public class FPSController : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
+        //return;
         float magnitude = motor.controller.velocity.magnitude * 0.5f;
         float swaySpeed = 1;
         float sizeX = 1.3f;

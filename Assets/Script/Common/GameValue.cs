@@ -14,18 +14,18 @@ public class GameValue
 
     public static string GetMapSceneName()
     {
-        if(mapId == 1)
+        if (mapId == 1)
+        {
+            return "changjing0";
+        }
+        else if (mapId == 2)
         {
             return "changjing1";
-        }
-        else if(mapId== 2)
-        {
-            return "changjing2";
 
         }
         else if (mapId == 3)
         {
-            return "changjing-3";
+            return "changjing2";
         }
         return "";
     }
@@ -55,6 +55,6 @@ public class GameValue
         if (mapid > MapLevelConfig.Length)
             return 0;
         else
-            return MapLevelConfig[mapid-1];
+            return MapLevelConfig[mapid - 1];
     }
 }
